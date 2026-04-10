@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ka">
 <head>
 <meta charset="UTF-8">
@@ -9,27 +10,41 @@
 /* ─── RESET ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ─── SCREEN VARIABLES ─── */
+/* ─── THEME ─── */
 :root {
-  --blue:   #1a4a7a;
-  --blue2:  #2563a8;
-  --line:   #1a4a7a;
-  --bg:     #eef2f7;
-  --card:   #ffffff;
+  --page-width: 210mm;
+  --blue: #1a4a7a;
+  --blue2: #2563a8;
+  --line: #1a4a7a;
+  --bg: #eef2f7;
+  --card: #ffffff;
   --border: #c8d4e3;
-  --text:   #1e293b;
-  --muted:  #64748b;
-  --green:  #047857;
-  --red:    #b91c1c;
-  --amber:  #b45309;
+  --soft-border: #dbe5f0;
+  --text: #1e293b;
+  --muted: #64748b;
+  --green: #047857;
+  --red: #b91c1c;
+  --amber: #b45309;
+  --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.12);
+  --shadow-md: 0 4px 18px rgba(15, 23, 42, 0.10);
 }
+
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Noto Sans Georgian', 'Sylfaen', Georgia, serif;
-  background: var(--bg);
+  background:
+    radial-gradient(circle at top, rgba(37, 99, 168, 0.08), transparent 30%),
+    var(--bg);
   color: var(--text);
   font-size: 14px;
   line-height: 1.65;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
 }
 
 /* ══════════════════════════════════════════════
@@ -37,51 +52,125 @@ body {
 ══════════════════════════════════════════════ */
 #toc-screen {
   min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 24px;
 }
+
 .toc-card {
-  background: white; border-radius: 16px;
-  box-shadow: 0 8px 40px rgba(0,0,0,.15);
-  padding: 40px 44px; max-width: 720px; width: 100%;
+  background: white;
+  border-radius: 18px;
+  box-shadow: var(--shadow-lg);
+  padding: 40px 44px;
+  max-width: 760px;
+  width: 100%;
+  border: 1px solid rgba(200, 212, 227, 0.8);
 }
+
 .toc-card h1 {
-  font-size: 22px; color: var(--blue); font-weight: 700; margin-bottom: 4px;
+  font-size: 24px;
+  color: var(--blue);
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
 }
-.toc-card .sub { color: var(--muted); font-size: 13px; margin-bottom: 28px; }
+
+.toc-card .sub {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 28px;
+}
 
 .global-fields {
-  display: flex; gap: 20px; flex-wrap: wrap;
-  background: #f8fafc; border-radius: 10px;
-  padding: 16px 20px; margin-bottom: 28px; border: 1px solid var(--border);
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  border: 1px solid var(--border);
 }
-.gf-group { flex: 1; min-width: 200px; }
-.gf-group label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+
+.gf-group {
+  flex: 1;
+  min-width: 220px;
+}
+
+.gf-group label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
 .gf-group input {
-  width: 100%; border: none; border-bottom: 2px solid var(--line);
-  padding: 5px 0; font-size: 14px; font-family: inherit;
-  background: transparent; outline: none; color: var(--text);
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid var(--line);
+  padding: 5px 0;
+  font-size: 14px;
+  background: transparent;
+  outline: none;
+  color: var(--text);
 }
-.gf-hint { font-size: 11px; color: var(--blue2); margin-top: 8px; font-style: italic; }
+
+.gf-hint {
+  font-size: 11px;
+  color: var(--blue2);
+  margin-top: 8px;
+  font-style: italic;
+}
 
 .doc-list { list-style: none; }
 .doc-list li + li { border-top: 1px solid #f1f5f9; }
+
 .doc-list a {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 10px; text-decoration: none; color: var(--text);
-  border-radius: 8px; transition: background .12s;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 10px;
+  text-decoration: none;
+  color: var(--text);
+  border-radius: 10px;
+  transition: background .12s, transform .12s;
 }
-.doc-list a:hover { background: #f0f6ff; }
+
+.doc-list a:hover {
+  background: #f0f6ff;
+  transform: translateX(2px);
+}
+
 .doc-num {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--blue); color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 700; flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--blue2), var(--blue));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
 }
-.doc-name { flex: 1; font-size: 14px; }
+
+.doc-name {
+  flex: 1;
+  font-size: 14px;
+}
+
 .doc-badge {
-  font-size: 11px; background: #dbeafe; color: var(--blue);
-  padding: 2px 9px; border-radius: 20px; flex-shrink: 0;
+  font-size: 11px;
+  background: #dbeafe;
+  color: var(--blue);
+  padding: 3px 10px;
+  border-radius: 20px;
+  flex-shrink: 0;
 }
 
 /* ══════════════════════════════════════════════
@@ -90,201 +179,610 @@ body {
 #viewer { display: none; }
 
 .top-bar {
-  position: sticky; top: 0; z-index: 200;
-  background: var(--blue); color: white;
-  padding: 10px 20px; display: flex; align-items: center; gap: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--blue);
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
   box-shadow: 0 2px 8px rgba(0,0,0,.25);
 }
-.top-bar h2 { flex: 1; font-size: 14px; font-weight: 600; }
-.btn-back {
-  background: rgba(255,255,255,.18); color: white; border: none;
-  padding: 6px 15px; border-radius: 7px; cursor: pointer;
-  font-family: inherit; font-size: 13px; transition: background .12s;
+
+.top-bar h2 {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
 }
-.btn-back:hover { background: rgba(255,255,255,.32); }
+
+.btn-back,
 .btn-print {
-  background: var(--green); color: white; border: none;
-  padding: 7px 18px; border-radius: 7px; cursor: pointer;
-  font-family: inherit; font-size: 13px; font-weight: 600;
-  display: flex; align-items: center; gap: 6px; transition: background .12s;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background .12s, transform .12s;
 }
+
+.btn-back {
+  background: rgba(255,255,255,.18);
+  color: white;
+  padding: 6px 15px;
+}
+
+.btn-back:hover,
+.btn-print:hover {
+  transform: translateY(-1px);
+}
+
+.btn-back:hover { background: rgba(255,255,255,.32); }
+
+.btn-print {
+  background: var(--green);
+  color: white;
+  padding: 7px 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .btn-print:hover { background: #065f46; }
 
-/* Global info bar under topbar */
 .info-bar {
-  background: white; border-bottom: 2px solid var(--border);
-  padding: 10px 24px; display: flex; gap: 24px; flex-wrap: wrap; align-items: center;
+  background: white;
+  border-bottom: 2px solid var(--border);
+  padding: 10px 24px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
 }
-.info-bar .ib-group { display: flex; align-items: center; gap: 8px; }
-.info-bar label { font-size: 11px; color: var(--muted); font-weight: 600; white-space: nowrap; }
-.info-bar input {
-  border: none; border-bottom: 2px solid var(--line);
-  padding: 3px 0; font-size: 13px; font-family: inherit;
-  min-width: 180px; background: transparent; outline: none; color: var(--text);
-}
-.ib-hint { margin-left: auto; font-size: 11px; color: var(--blue2); font-style: italic; }
 
-/* Document page */
+.info-bar .ib-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-bar label {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.info-bar input {
+  border: none;
+  border-bottom: 2px solid var(--line);
+  padding: 3px 0;
+  font-size: 13px;
+  min-width: 180px;
+  background: transparent;
+  outline: none;
+  color: var(--text);
+}
+
+.ib-hint {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--blue2);
+  font-style: italic;
+}
+
 .doc-page {
-  max-width: 820px; margin: 28px auto; padding: 0 20px 60px;
+  max-width: calc(var(--page-width) + 36px);
+  margin: 28px auto;
+  padding: 0 18px 60px;
   display: none;
 }
+
 .doc-page.active { display: block; }
 
 /* ══════════════════════════════════════════════
-   DOCUMENT CONTENT STYLES (Word-like)
+   DOCUMENT CONTENT STYLES
 ══════════════════════════════════════════════ */
 .sheet {
+  width: 100%;
   background: white;
-  padding: 60px 64px;
-  box-shadow: 0 2px 16px rgba(0,0,0,.10);
-  border-radius: 4px;
+  padding: 56px 60px;
+  box-shadow: var(--shadow-md);
+  border-radius: 8px;
   min-height: 297mm;
+  border: 1px solid #e2e8f0;
 }
 
-/* Typography */
-.hd-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; font-size: 13px; }
-.hd-left { }
-.hd-right { text-align: right; color: var(--muted); }
+.hd-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
 
 .doc-title {
-  text-align: center; font-size: 16px; font-weight: 700;
-  margin: 18px 0 22px; line-height: 1.5; color: var(--text);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 18px 0 22px;
+  line-height: 1.5;
+  color: var(--text);
 }
 
-/* Underline input — replaces "___" in original */
 .ul {
   display: inline-block;
+  border: none;
   border-bottom: 1.5px solid var(--line);
-  min-width: 140px; padding: 1px 3px;
-  font-family: inherit; font-size: 14px;
-  background: transparent; outline: none;
-  color: var(--text); vertical-align: bottom;
+  min-width: 140px;
+  padding: 1px 3px;
+  background: transparent;
+  outline: none;
+  color: var(--text);
+  vertical-align: bottom;
+  border-radius: 0;
   transition: border-color .15s, background .15s;
+  appearance: none;
+  -webkit-appearance: none;
 }
-.ul:focus { border-color: #0ea5e9; background: #f0f9ff; border-radius: 3px 3px 0 0; }
+
+.ul:focus {
+  border-color: #0ea5e9;
+  background: #f0f9ff;
+}
+
+.ul::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
 .ul.w-xs { min-width: 70px; }
 .ul.w-sm { min-width: 110px; }
 .ul.w-md { min-width: 180px; }
 .ul.w-lg { min-width: 260px; }
 .ul.w-xl { min-width: 340px; }
-.ul.w-full { min-width: 100%; display: block; margin-top: 4px; }
-input[type=date].ul, input[type=time].ul { min-width: 140px; }
-
-/* Signature dash line */
-.dash {
-  display: inline-block; border-bottom: 1.5px dashed #94a3b8;
-  min-width: 200px; vertical-align: bottom; margin: 0 4px;
+.ul.w-full {
+  min-width: 100%;
+  display: block;
+  margin-top: 4px;
 }
-.dash.lg { min-width: 280px; }
-.dash.xl { min-width: 380px; }
 
-/* Paragraph */
-.p { margin: 10px 0; text-align: justify; }
+input[type="date"].ul,
+input[type="time"].ul,
+input[type="datetime-local"].ul {
+  min-width: 140px;
+}
+
+.dash {
+  display: inline-block;
+  border-bottom: 1.5px dashed #94a3b8;
+  min-width: 200px;
+  vertical-align: bottom;
+  margin: 0 4px;
+}
+
+.p {
+  margin: 10px 0;
+  text-align: justify;
+}
+
 .p.center { text-align: center; }
 .bold { font-weight: 700; }
 
-/* Numbered section */
-.ns { margin: 12px 0 4px; font-weight: 700; }
-.ns-body { margin: 0 0 10px 18px; text-align: justify; color: #334155; }
+.ns {
+  margin: 12px 0 4px;
+  font-weight: 700;
+}
 
-/* Horizontal rule */
-.hr { border: none; border-top: 1px solid #e2e8f0; margin: 18px 0; }
+.ns-body {
+  margin: 0 0 10px 18px;
+  text-align: justify;
+  color: #334155;
+}
 
-/* Two column layout */
-.cols2 { display: flex; gap: 40px; flex-wrap: wrap; margin: 14px 0; }
-.cols2 > .col { flex: 1; min-width: 200px; }
+.hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 18px 0;
+}
 
-/* Field row */
+.cols2 {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+
+.cols2 > .col {
+  flex: 1;
+  min-width: 200px;
+}
+
 .fr { margin: 11px 0; }
-.fr > label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; font-weight: 600; }
 
-/* Warning block */
+.fr > label,
+.signature-slot label,
+.signature-card label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
 .warn {
-  border: 1.5px solid #fca5a5; border-radius: 6px;
-  padding: 14px 18px; margin: 16px 0; background: #fff7f7;
+  border: 1.5px solid #fca5a5;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  background: #fff7f7;
   font-size: 13px;
+  break-inside: avoid;
+}
+
+.signature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+  margin-top: 18px;
+}
+
+.signature-card {
+  border: 1px solid var(--soft-border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  background: #fbfdff;
+  break-inside: avoid;
+}
+
+.signature-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(120px, 0.8fr);
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.signature-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.signature-line {
+  width: 100%;
+  min-height: 28px;
+  border-bottom: 1.5px solid var(--line);
+}
+
+.signature-line.dashed {
+  border-bottom-style: dashed;
+  border-bottom-color: #94a3b8;
+}
+
+.refusal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 24px;
+  margin-top: 14px;
 }
 
 /* ── OQMI TABLE ── */
-.oqmi-head { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 16px; }
-.oqmi-head .fr { min-width: 160px; }
+.mon-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin: 10px 0;
+}
 
-.mon-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 10px 0; }
 .mon-table th {
-  background: var(--blue); color: white;
-  padding: 7px 8px; border: 1px solid #c8d4e3;
-  text-align: center; font-size: 12px;
+  background: var(--blue);
+  color: white;
+  padding: 7px 8px;
+  border: 1px solid #c8d4e3;
+  text-align: center;
+  font-size: 12px;
 }
+
 .mon-table td {
-  border: 1px solid #d1dae6; padding: 5px 7px;
-  vertical-align: top; min-height: 44px;
+  border: 1px solid #d1dae6;
+  padding: 5px 7px;
+  vertical-align: top;
+  min-height: 44px;
 }
+
 .mon-table tr:nth-child(even) td { background: #f8fafc; }
+
 .mon-table td input {
-  border: none; border-bottom: 1px solid #94a3b8;
-  width: 100%; font-family: inherit; font-size: 12px;
-  background: transparent; outline: none; padding: 2px 0; margin-bottom: 3px;
+  border: none;
+  border-bottom: 1px solid #94a3b8;
+  width: 100%;
+  font-size: 12px;
+  background: transparent;
+  outline: none;
+  padding: 2px 0;
+  margin-bottom: 3px;
 }
+
 .mon-table td textarea {
-  border: 1px solid #cbd5e1; width: 100%;
-  font-family: inherit; font-size: 12px; resize: vertical;
-  min-height: 52px; padding: 4px; border-radius: 3px; outline: none;
+  border: 1px solid #cbd5e1;
+  width: 100%;
+  font-size: 12px;
+  resize: vertical;
+  min-height: 52px;
+  padding: 4px;
+  border-radius: 3px;
+  outline: none;
 }
-.mon-table td textarea:focus, .mon-table td input:focus { border-color: #0ea5e9; }
+
+.mon-table td textarea:focus,
+.mon-table td input:focus {
+  border-color: #0ea5e9;
+}
+
 .add-row-btn {
-  background: var(--blue2); color: white; border: none;
-  padding: 7px 16px; border-radius: 6px; cursor: pointer;
-  font-family: inherit; font-size: 12px; margin-top: 8px;
+  background: var(--blue2);
+  color: white;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 8px;
 }
+
 .add-row-btn:hover { background: var(--blue); }
 
 /* ── SCREENING TABLE ── */
-.screen-section { margin: 16px 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.screen-section {
+  margin: 16px 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  break-inside: avoid;
+}
+
 .screen-sec-title {
-  padding: 8px 14px; font-weight: 700; font-size: 13px; color: white;
+  padding: 8px 14px;
+  font-weight: 700;
+  font-size: 13px;
+  color: white;
 }
+
 .screen-sec-title.blue { background: var(--blue2); }
-.screen-sec-title.red  { background: var(--red); }
+.screen-sec-title.red { background: var(--red); }
 .screen-sec-title.amber { background: var(--amber); }
+
 .screen-item {
-  display: flex; align-items: flex-start; justify-content: space-between;
-  padding: 8px 14px; border-top: 1px solid #f1f5f9; gap: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-top: 1px solid #f1f5f9;
+  gap: 20px;
 }
+
 .screen-item:first-child { border-top: none; }
-.si-text { flex: 1; font-size: 13px; line-height: 1.5; }
-.yn { display: flex; gap: 14px; flex-shrink: 0; padding-top: 1px; }
-.yn label { display: flex; align-items: center; gap: 5px; font-size: 13px; cursor: pointer; }
-.yn input[type=radio] { width: 15px; height: 15px; accent-color: var(--blue); cursor: pointer; }
+
+.si-text {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.yn {
+  display: flex;
+  gap: 14px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+.yn label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.yn input[type="radio"] {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
 .info-note {
-  background: #f0f9ff; border-left: 3px solid #0ea5e9;
-  padding: 8px 14px; border-radius: 0 5px 5px 0; font-size: 13px;
-  color: #0369a1; margin: 12px 0;
+  background: #f0f9ff;
+  border-left: 3px solid #0ea5e9;
+  padding: 8px 14px;
+  border-radius: 0 5px 5px 0;
+  font-size: 13px;
+  color: #0369a1;
+  margin: 12px 0;
+}
+
+/* ── PRINT MIRRORS ── */
+.print-mirror {
+  display: none;
+  color: var(--text);
+  font: inherit;
+}
+
+.print-mirror.inline {
+  vertical-align: baseline;
+}
+
+.print-mirror.block {
+  white-space: pre-wrap;
+}
+
+.print-mirror.emph {
+  font-weight: 700;
+}
+
+.print-mirror.w-xs { min-width: 70px; }
+.print-mirror.w-sm { min-width: 110px; }
+.print-mirror.w-md { min-width: 180px; }
+.print-mirror.w-lg { min-width: 260px; }
+.print-mirror.w-xl { min-width: 340px; }
+.print-mirror.w-full { width: 100%; }
+
+.print-mirror.empty.inline {
+  min-height: 1em;
+  border-bottom: 1px solid #94a3b8;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .sheet { padding: 34px 26px; }
+  .signature-grid,
+  .refusal-grid,
+  .signature-row {
+    grid-template-columns: 1fr;
+  }
+  .screen-item {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .yn { padding-top: 0; }
+}
+
+@media (max-width: 640px) {
+  #toc-screen { padding: 16px; }
+  .toc-card { padding: 28px 22px; }
+  .info-bar { padding: 10px 16px; gap: 14px; }
+  .doc-page { padding: 0 10px 36px; }
+  .top-bar { padding: 10px 12px; }
 }
 
 /* ══════════════════════════════════════════════
    PRINT
 ══════════════════════════════════════════════ */
 @media print {
-  /* hide everything except active page */
-  #toc-screen, .top-bar, .info-bar, .add-row-btn { display: none !important; }
-  body { background: white !important; }
-  #viewer { display: block !important; }
-  .doc-page { display: none !important; max-width: none; margin: 0; padding: 0; }
-  .doc-page.active { display: block !important; }
-  .sheet {
-    padding: 18mm 20mm !important;
-    box-shadow: none !important; border-radius: 0 !important;
-    min-height: unset !important;
+  html, body {
+    background: white !important;
   }
-  /* no browser header/footer — user should set margins=none; we can't force it */
-  @page { margin: 0; }
 
-  /* keep colors */
+  #toc-screen,
+  .top-bar,
+  .info-bar,
+  .add-row-btn {
+    display: none !important;
+  }
+
+  #viewer {
+    display: block !important;
+  }
+
+  .doc-page {
+    display: none !important;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .doc-page.active {
+    display: block !important;
+  }
+
+  .sheet {
+    width: auto !important;
+    min-height: unset !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  input:not([type="radio"]):not([type="checkbox"]):not([type="button"]):not([type="submit"]):not([type="hidden"]),
+  textarea {
+    display: none !important;
+  }
+
+  .print-mirror {
+    display: inline !important;
+  }
+
+  .print-mirror.inline {
+    display: inline-block !important;
+    vertical-align: baseline;
+  }
+
+  .print-mirror.block {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .print-mirror.empty.inline {
+    min-width: 5ch;
+  }
+
+  .mon-table .print-mirror.empty,
+  .signature-card .print-mirror.empty,
+  .warn .print-mirror.empty {
+    border-bottom: none !important;
+  }
+
+  .signature-card {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  .signature-grid,
+  .refusal-grid {
+    gap: 12px 18px !important;
+  }
+
+  .signature-row {
+    gap: 12px !important;
+  }
+
+  .signature-slot {
+    max-width: 240px;
+  }
+
+  .signature-line {
+    max-width: 220px;
+    min-height: 20px;
+  }
+
+  .signature-card .print-mirror.block {
+    display: inline-block !important;
+    width: auto !important;
+    min-width: 140px;
+    max-width: 240px;
+  }
+
+  .warn {
+    background: #fff7f7 !important;
+    border-color: #fca5a5 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
   .screen-sec-title.blue  { background: var(--blue2) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .screen-sec-title.red   { background: var(--red)   !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .screen-sec-title.red   { background: var(--red) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .screen-sec-title.amber { background: var(--amber) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .mon-table th { background: var(--blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .screen-section,
+  .warn,
+  .signature-card,
+  tr,
+  td,
+  th {
+    break-inside: avoid;
+  }
 }
 </style>
 </head>
@@ -295,7 +793,7 @@ input[type=date].ul, input[type=time].ul { min-width: 140px; }
 ══════════════════════════════════════════ -->
 <div id="toc-screen">
   <div class="toc-card">
-    <h1>🏥 თრომბექტომია / ლიზისი</h1>
+    <h1>თრომბექტომია / ლიზისი</h1>
     <p class="sub">სამედიცინო ფორმები — გახსენით სასურველი დოკუმენტი</p>
 
     <div class="global-fields">
@@ -349,15 +847,12 @@ input[type=date].ul, input[type=time].ul { min-width: 140px; }
      VIEWER
 ══════════════════════════════════════════ -->
 <div id="viewer">
-
-  <!-- Top bar -->
   <div class="top-bar">
     <button class="btn-back" onclick="showTOC()">← სია</button>
     <h2 id="vbar-title"></h2>
-    <button class="btn-print" onclick="doPrint()">🖨&nbsp; ბეჭდვა</button>
+    <button class="btn-print" onclick="doPrint()">🖨 ბეჭდვა</button>
   </div>
 
-  <!-- Info bar -->
   <div class="info-bar">
     <div class="ib-group">
       <label>პაციენტი:</label>
@@ -370,454 +865,516 @@ input[type=date].ul, input[type=time].ul { min-width: 140px; }
     <span class="ib-hint">ცვლილება ყველა ფორმაში გადადის</span>
   </div>
 
-  <!-- ─────────────────────────────────────────
-       DOC 0 — 36-ე დადგ. (70/30)
-  ───────────────────────────────────────── -->
+  <!-- DOC 0 -->
   <div class="doc-page" id="doc-0">
-  <div class="sheet">
-    <div class="hd-row">
-      <span class="bold">დანართი 13</span>
-      <span>სამედიცინო დოკუმენტაცია ფორმა NIV</span>
-    </div>
-
-    <div class="doc-title">
-      პაციენტის წერილობითი ინფორმაციული თანხმობა სამედიცინო<br>მომსახურეობის გაწევაზე
-    </div>
-
-    <div class="p">
-      მე,&nbsp;&nbsp;<input type="text" class="ul w-lg patient-f" data-doc="0" placeholder="სახელი / გვარი / პირადი ნომერი" oninput="onPatient(this)">&nbsp;&nbsp;
-      (პაციენტი,/ პაციენტის ოჯახის წევრი,/კანონიერი წარმომადგენელი (პირადი ნომერი)
-    </div>
-    <div class="p" style="padding-left:60px;">(სახელი/გვარი)</div>
-
-    <div class="p">ექიმი-ნევროლოგისგან სრულად და ამომწურავად, მივიღე ინფორმაცია სამედიცინო მომსახურეობის გაწევის შესახებ, მათ შორის:</div>
-
-    <div class="ns">1. სამედიცინო მომსახურეობის არსის და საჭიროების შესახებ:</div>
-    <div class="ns-body">აღნიშნული დიაგნოზი – თავის ტვინის ინფარქტი განვითარებული ცერებრული არტერიების დაუზუსტებელი ოკლუზიისა ან სტენოზის გამო – მოითხოვს გადაუდებელ სტაციონარულ მკურნალობას, დამატებით კლინიკო-ლაბორატორიულ კვლვებს, გადაუდებელ რეკანალიზაციურ თერაპიას.</div>
-
-    <div class="ns">2. სამედიცინო მომსახურეობის მოსალოდნელი შედეგების შესახებ:</div>
-    <div class="ns-body">ინსულტის განვითარებამდე არსებული სტატუსის აღდგენა, ინვალიდიზაციის ხარისხის შემცირების ან/და ნევროლოგიური დეფიციტის სრულად/ნაწილობრივ აღდგენის ან სტაბილიზაციის მიზნით. ჰემოდინამიკის სტაბილიზირება, ვიტალური ფუნქციების სტაბილიზაცია.</div>
-
-    <div class="ns">3. პაციენტის ჯანმრთელობის და სიცოცხლისათვის ამ მომსახურებასთან დაკავშირებული რისკის შესახებ:</div>
-    <div class="ns-body">მედიკამენტოზური ალერგია, გასტრო-ინტესტინალური სისხლდენა, იშემიური ინსულტის განმეორება, სასიცოცხლო ფუნქციების მოშლა, ჰემორაგიული ინსულტი ან/და ლეტალური გამოსავალი. ინვაზიური პროცედურების ჩატარების დროს: შარდის ბუშტის კათეტერიზაცია — ჰემატურია, საშარდე გზების ინფექციის რისკის მომატება, პერიფერიული ვენური კათეტერი — ფლებიტი, ართერიული ხაზი — ჰემატომა.</div>
-
-    <div class="ns">4. განზრახული სამედიცინო მომსახურებების, სხვა ალტერნატული ვარიანტებისა, მათი თანმხლები რისკისა და შესაძლო ეფექტების შესახებ:</div>
-    <div class="ns-body">პაციენტი საჭიროებს ინსულტის მწვავე თერაპიას — თრომბოლიზისის/თრომბექტომიის ჩატარებას ინვალიდიზაციის ხარისხის შემცირების ან/და ნევროლოგიური დეფიციტის სრულად/ნაწილობრივ აღდგენის ან სტაბილიზაციის მიზნით. ინფორმირებული ვარ, რომ ზემოთ აღნიშნული თერაპიის ეფექტურობა დამოკიდებულია დროზე ინსულტის სიმპტომების დაწყებიდან.</div>
-
-    <div class="ns">5. სამედიცინო მომსახურეობაზე უარის თქმის მოსალოდნელი შედეგების შესახებ:</div>
-    <div class="ns-body">დაავადების პროგრესირება, რეინსულტი, სრული ინვალიდიზაცია, სასიცოცხლო ფუნქციების მოშლა, შესაძლო ლეტალური (სასიკვდილო) გამოსავალი.</div>
-
-    <div class="ns">6. ფინანსური და სოციალური საკითხის შესახებ:</div>
-    <div class="ns-body">დეტალურ ინფორმაციას მომაწვდის ნეიროქირურგიული განყოფილების ფინანსური მენეჯერი. სამედიცინო მომსახურეობის ხარჯების <strong>70%</strong> დაფარავს სოციალური მომსახურეობის სააგენტო, ხოლო <strong>30%</strong>-ს — პაციენტი/ პაციენტის ოჯახის წევრები.</div>
-
-    <div class="hr"></div>
-
-    <div class="p">პაციენტს / პაციენტის ოჯახის წევრებს, პასუხი გაეცა ყველა სხვა საინტერესო შეკითხვაზე და ხელის მოწერით ადასტურებს, რომ ზემოთ ხსენებულთან დაკავშირებით პრეტენზიები არ გააჩნია:</div>
-
-    <div class="cols2" style="margin-top:18px;">
-      <div class="col">
-        <div class="fr"><label>ექიმი / ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="0" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
-        <div class="fr" style="margin-top:14px;"><label>ხელმოწერა</label><span class="dash xl"></span></div>
-        <div class="fr" style="margin-top:14px;"><label>თარიღი</label><input type="date" class="ul w-sm"></div>
+    <div class="sheet">
+      <div class="hd-row">
+        <span class="bold">დანართი 13</span>
+        <span>სამედიცინო დოკუმენტაცია ფორმა NIV</span>
       </div>
-      <div class="col">
-        <div class="fr"><label>პაციენტის ნათესავის / კანონიერი წარმომადგენლის სახელი გვარი</label><input type="text" class="ul w-lg"></div>
-        <div class="fr" style="margin-top:14px;"><label>ხელმოწერა (თუ პაციენტი ვერ შემოდის კონტაქტში)</label><span class="dash xl"></span></div>
-      </div>
-    </div>
 
-    <div class="hr"></div>
-    <div class="warn">
-      <strong>პაციენტი არ არის თანახმა შეთავაზებულ მკურნალობაზე</strong>, რასაც ადასტურებს საკუთარი ხელის მოწერით:<br><br>
-      ხელმოწერა:&nbsp;<span class="dash lg"></span>&nbsp;&nbsp;&nbsp;სახელი/გვარი:&nbsp;<span class="dash lg"></span>
+      <div class="doc-title">
+        პაციენტის წერილობითი ინფორმაციული თანხმობა სამედიცინო<br>მომსახურეობის გაწევაზე
+      </div>
+
+      <div class="p">
+        მე,&nbsp;&nbsp;<input type="text" class="ul w-lg patient-f" data-doc="0" placeholder="სახელი / გვარი / პირადი ნომერი" oninput="onPatient(this)">&nbsp;&nbsp;
+        (პაციენტი,/ პაციენტის ოჯახის წევრი,/კანონიერი წარმომადგენელი (პირადი ნომერი)
+      </div>
+
+      <div class="p">ექიმი-ნევროლოგისგან სრულად და ამომწურავად, მივიღე ინფორმაცია სამედიცინო მომსახურეობის გაწევის შესახებ, მათ შორის:</div>
+
+      <div class="ns">1. სამედიცინო მომსახურეობის არსის და საჭიროების შესახებ:</div>
+      <div class="ns-body">აღნიშნული დიაგნოზი – თავის ტვინის ინფარქტი განვითარებული ცერებრული არტერიების დაუზუსტებელი ოკლუზიისა ან სტენოზის გამო – მოითხოვს გადაუდებელ სტაციონარულ მკურნალობას, დამატებით კლინიკო-ლაბორატორიულ კვლვებს, გადაუდებელ რეკანალიზაციურ თერაპიას.</div>
+
+      <div class="ns">2. სამედიცინო მომსახურეობის მოსალოდნელი შედეგების შესახებ:</div>
+      <div class="ns-body">ინსულტის განვითარებამდე არსებული სტატუსის აღდგენა, ინვალიდიზაციის ხარისხის შემცირების ან/და ნევროლოგიური დეფიციტის სრულად/ნაწილობრივ აღდგენის ან სტაბილიზაციის მიზნით. ჰემოდინამიკის სტაბილიზირება, ვიტალური ფუნქციების სტაბილიზაცია.</div>
+
+      <div class="ns">3. პაციენტის ჯანმრთელობის და სიცოცხლისათვის ამ მომსახურებასთან დაკავშირებული რისკის შესახებ:</div>
+      <div class="ns-body">მედიკამენტოზური ალერგია, გასტრო-ინტესტინალური სისხლდენა, იშემიური ინსულტის განმეორება, სასიცოცხლო ფუნქციების მოშლა, ჰემორაგიული ინსულტი ან/და ლეტალური გამოსავალი. ინვაზიური პროცედურების ჩატარების დროს: შარდის ბუშტის კათეტერიზაცია — ჰემატურია, საშარდე გზების ინფექციის რისკის მომატება, პერიფერიული ვენური კათეტერი — ფლებიტი, ართერიული ხაზი — ჰემატომა.</div>
+
+      <div class="ns">4. განზრახული სამედიცინო მომსახურებების, სხვა ალტერნატული ვარიანტებისა, მათი თანმხლები რისკისა და შესაძლო ეფექტების შესახებ:</div>
+      <div class="ns-body">პაციენტი საჭიროებს ინსულტის მწვავე თერაპიას — თრომბოლიზისის/თრომბექტომიის ჩატარებას ინვალიდიზაციის ხარისხის შემცირების ან/და ნევროლოგიური დეფიციტის სრულად/ნაწილობრივ აღდგენის ან სტაბილიზაციის მიზნით. ინფორმირებული ვარ, რომ ზემოთ აღნიშნული თერაპიის ეფექტურობა დამოკიდებულია დროზე ინსულტის სიმპტომების დაწყებიდან.</div>
+
+      <div class="ns">5. სამედიცინო მომსახურეობაზე უარის თქმის მოსალოდნელი შედეგების შესახებ:</div>
+      <div class="ns-body">დაავადების პროგრესირება, რეინსულტი, სრული ინვალიდიზაცია, სასიცოცხლო ფუნქციების მოშლა, შესაძლო ლეტალური (სასიკვდილო) გამოსავალი.</div>
+
+      <div class="ns">6. ფინანსური და სოციალური საკითხის შესახებ:</div>
+      <div class="ns-body">დეტალურ ინფორმაციას მომაწვდის ნეიროქირურგიული განყოფილების ფინანსური მენეჯერი. სამედიცინო მომსახურეობის ხარჯების <strong>70%</strong> დაფარავს სოციალური მომსახურეობის სააგენტო, ხოლო <strong>30%</strong>-ს — პაციენტი/ პაციენტის ოჯახის წევრები.</div>
+
+      <div class="hr"></div>
+
+      <div class="p">პაციენტს / პაციენტის ოჯახის წევრებს, პასუხი გაეცა ყველა სხვა საინტერესო შეკითხვაზე და ხელის მოწერით ადასტურებს, რომ ზემოთ ხსენებულთან დაკავშირებით პრეტენზიები არ გააჩნია:</div>
+
+      <div class="signature-grid">
+        <div class="signature-card">
+          <div class="fr"><label>ექიმი / ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="0" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
+          <div class="signature-row">
+            <div class="signature-slot">
+              <label>ხელმოწერა</label>
+              <span class="signature-line"></span>
+            </div>
+            <div class="signature-slot">
+              <label>თარიღი</label>
+              <input type="date" class="ul w-sm">
+            </div>
+          </div>
+        </div>
+        <div class="signature-card">
+          <div class="fr"><label>პაციენტის ნათესავის / კანონიერი წარმომადგენლის სახელი გვარი</label><input type="text" class="ul w-lg"></div>
+          <div class="signature-slot" style="margin-top:14px;">
+            <label>ხელმოწერა (თუ პაციენტი ვერ შემოდის კონტაქტში)</label>
+            <span class="signature-line"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="warn">
+        <strong>პაციენტი არ არის თანახმა შეთავაზებულ მკურნალობაზე</strong>, რასაც ადასტურებს საკუთარი ხელის მოწერით:
+        <div class="refusal-grid">
+          <div class="signature-slot">
+            <label>ხელმოწერა</label>
+            <span class="signature-line dashed"></span>
+          </div>
+          <div class="signature-slot">
+            <label>სახელი / გვარი</label>
+            <span class="signature-line dashed"></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  </div><!-- /doc-0 -->
 
-
-  <!-- ─────────────────────────────────────────
-       DOC 1 — 165-ე დადგ. (90/10)
-  ───────────────────────────────────────── -->
+  <!-- DOC 1 -->
   <div class="doc-page" id="doc-1">
-  <div class="sheet">
-    <div class="hd-row">
-      <span class="bold">დანართი 13</span>
-      <span>სამედიცინო დოკუმენტაცია ფორმა NIV</span>
-    </div>
-
-    <div class="doc-title">
-      პაციენტის წერილობითი ინფორმაციული თანხმობა სამედიცინო<br>მომსახურეობის გაწევაზე
-    </div>
-
-    <div class="p">
-      მე,&nbsp;&nbsp;<input type="text" class="ul w-lg patient-f" data-doc="1" placeholder="სახელი / გვარი / პირადი ნომერი" oninput="onPatient(this)">&nbsp;&nbsp;
-      (პაციენტი,/ პაციენტის ოჯახის წევრი,/კანონიერი წარმომადგენელი (პირადი ნომერი)
-    </div>
-    <div class="p" style="padding-left:60px;">(სახელი/გვარი)</div>
-
-    <div class="p">ექიმი-ნევროლოგისგან სრულად და ამომწურავად, მივიღე ინფორმაცია სამედიცინო მომსახურეობის გაწევის შესახებ, მათ შორის:</div>
-
-    <div class="ns">1. სამედიცინო მომსახურეობის არსის და საჭიროების შესახებ:</div>
-    <div class="ns-body">აღნიშნული დიაგნოზი – თავის ტვინის ინფარქტი განვითარებული ცერებრული არტერიების დაუზუსტებელი ოკლუზიისა ან სტენოზის გამო – მოითხოვს გადაუდებელ სტაციონარულ მკურნალობას, დამატებით კლინიკო-ლაბორატორიულ კვლვებს, გადაუდებელ რეკანალიზაციურ თერაპიას.</div>
-
-    <div class="ns">2. სამედიცინო მომსახურეობის მოსალოდნელი შედეგების შესახებ:</div>
-    <div class="ns-body">ინსულტის განვითარებამდე არსებული სტატუსის აღდგენა, ინვალიდიზაციის ხარისხის შემცირების ან/და ნევროლოგიური დეფიციტის სრულად/ნაწილობრივ აღდგენის ან სტაბილიზაციის მიზნით. ჰემოდინამიკის სტაბილიზირება, ვიტალური ფუნქციების სტაბილიზაცია.</div>
-
-    <div class="ns">3. პაციენტის ჯანმრთელობის და სიცოცხლისათვის ამ მომსახურებასთან დაკავშირებული რისკის შესახებ:</div>
-    <div class="ns-body">მედიკამენტოზური ალერგია, გასტრო-ინტესტინალური სისხლდენა, იშემიური ინსულტის განმეორება, სასიცოცხლო ფუნქციების მოშლა, ჰემორაგიული ინსულტი ან/და ლეტალური გამოსავალი. ინვაზიური პროცედურების ჩატარების დროს: შარდის ბუშტის კათეტერიზაცია — ჰემატურია, საშარდე გზების ინფექციის რისკის მომატება, პერიფერიული ვენური კათეტერი — ფლებიტი, ართერიული ხაზი — ჰემატომა.</div>
-
-    <div class="ns">4. განზრახული სამედიცინო მომსახურებების, სხვა ალტერნატული ვარიანტებისა, მათი თანმხლები რისკისა და შესაძლო ეფექტების შესახებ:</div>
-    <div class="ns-body">პაციენტი საჭიროებს ინსულტის მწვავე თერაპიას — თრომბოლიზისის/თრომბექტომიის ჩატარებას. ინფორმირებული ვარ, რომ ზემოთ აღნიშნული თერაპიის ეფექტურობა დამოკიდებულია დროზე ინსულტის სიმპტომების დაწყებიდან.</div>
-
-    <div class="ns">5. სამედიცინო მომსახურეობაზე უარის თქმის მოსალოდნელი შედეგების შესახებ:</div>
-    <div class="ns-body">დაავადების პროგრესირება, რეინსულტი, სრული ინვალიდიზაცია, სასიცოცხლო ფუნქციების მოშლა, შესაძლო ლეტალური (სასიკვდილო) გამოსავალი.</div>
-
-    <div class="ns">6. ფინანსური და სოციალური საკითხის შესახებ:</div>
-    <div class="ns-body">დეტალურ ინფორმაციას მომაწვდის ნეიროქირურგიული განყოფილების ფინანსური მენეჯერი. სამედიცინო მომსახურეობის ხარჯების <strong>90%</strong> დაფარავს სოციალური მომსახურეობის სააგენტო, ხოლო <strong>10%</strong>-ს — პაციენტი/ პაციენტის ოჯახის წევრები.</div>
-
-    <div class="hr"></div>
-
-    <div class="p">პაციენტს / პაციენტის ოჯახის წევრებს, პასუხი გაეცა ყველა სხვა საინტერესო შეკითხვაზე და ხელის მოწერით ადასტურებს, რომ ზემოთ ხსენებულთან დაკავშირებით პრეტენზიები არ გააჩნია:</div>
-
-    <div class="cols2" style="margin-top:18px;">
-      <div class="col">
-        <div class="fr"><label>ექიმი / ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="1" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
-        <div class="fr" style="margin-top:14px;"><label>ხელმოწერა</label><span class="dash xl"></span></div>
-        <div class="fr" style="margin-top:14px;"><label>თარიღი</label><input type="date" class="ul w-sm"></div>
+    <div class="sheet">
+      <div class="hd-row">
+        <span class="bold">დანართი 13</span>
+        <span>სამედიცინო დოკუმენტაცია ფორმა NIV</span>
       </div>
-      <div class="col">
-        <div class="fr"><label>პაციენტის ნათესავის / კანონიერი წარმომადგენლის სახელი გვარი</label><input type="text" class="ul w-lg"></div>
-        <div class="fr" style="margin-top:14px;"><label>ხელმოწერა (თუ პაციენტი ვერ შემოდის კონტაქტში)</label><span class="dash xl"></span></div>
-      </div>
-    </div>
 
-    <div class="hr"></div>
-    <div class="warn">
-      <strong>პაციენტი არ არის თანახმა შეთავაზებულ მკურნალობაზე</strong>, რასაც ადასტურებს საკუთარი ხელის მოწერით:<br><br>
-      ხელმოწერა:&nbsp;<span class="dash lg"></span>&nbsp;&nbsp;&nbsp;სახელი/გვარი:&nbsp;<span class="dash lg"></span>
+      <div class="doc-title">
+        პაციენტის წერილობითი ინფორმაციული თანხმობა სამედიცინო<br>მომსახურეობის გაწევაზე
+      </div>
+
+      <div class="p">
+        მე,&nbsp;&nbsp;<input type="text" class="ul w-lg patient-f" data-doc="1" placeholder="სახელი / გვარი / პირადი ნომერი" oninput="onPatient(this)">&nbsp;&nbsp;
+        (პაციენტი,/ პაციენტის ოჯახის წევრი,/კანონიერი წარმომადგენელი (პირადი ნომერი)
+      </div>
+
+      <div class="p">ექიმი-ნევროლოგისგან სრულად და ამომწურავად, მივიღე ინფორმაცია სამედიცინო მომსახურეობის გაწევის შესახებ, მათ შორის:</div>
+
+      <div class="ns">1. სამედიცინო მომსახურეობის არსის და საჭიროების შესახებ:</div>
+      <div class="ns-body">აღნიშნული დიაგნოზი – თავის ტვინის ინფარქტი განვითარებული ცერებრული არტერიების დაუზუსტებელი ოკლუზიისა ან სტენოზის გამო – მოითხოვს გადაუდებელ სტაციონარულ მკურნალობას, დამატებით კლინიკო-ლაბორატორიულ კვლვებს, გადაუდებელ რეკანალიზაციურ თერაპიას.</div>
+
+      <div class="ns">2. სამედიცინო მომსახურეობის მოსალოდნელი შედეგების შესახებ:</div>
+      <div class="ns-body">ინსულტის განვითარებამდე არსებული სტატუსის აღდგენა, ინვალიდიზაციის ხარისხის შემცირების ან/და ნევროლოგიური დეფიციტის სრულად/ნაწილობრივ აღდგენის ან სტაბილიზაციის მიზნით. ჰემოდინამიკის სტაბილიზირება, ვიტალური ფუნქციების სტაბილიზაცია.</div>
+
+      <div class="ns">3. პაციენტის ჯანმრთელობის და სიცოცხლისათვის ამ მომსახურებასთან დაკავშირებული რისკის შესახებ:</div>
+      <div class="ns-body">მედიკამენტოზური ალერგია, გასტრო-ინტესტინალური სისხლდენა, იშემიური ინსულტის განმეორება, სასიცოცხლო ფუნქციების მოშლა, ჰემორაგიული ინსულტი ან/და ლეტალური გამოსავალი. ინვაზიური პროცედურების ჩატარების დროს: შარდის ბუშტის კათეტერიზაცია — ჰემატურია, საშარდე გზების ინფექციის რისკის მომატება, პერიფერიული ვენური კათეტერი — ფლებიტი, ართერიული ხაზი — ჰემატომა.</div>
+
+      <div class="ns">4. განზრახული სამედიცინო მომსახურებების, სხვა ალტერნატული ვარიანტებისა, მათი თანმხლები რისკისა და შესაძლო ეფექტების შესახებ:</div>
+      <div class="ns-body">პაციენტი საჭიროებს ინსულტის მწვავე თერაპიას — თრომბოლიზისის/თრომბექტომიის ჩატარებას. ინფორმირებული ვარ, რომ ზემოთ აღნიშნული თერაპიის ეფექტურობა დამოკიდებულია დროზე ინსულტის სიმპტომების დაწყებიდან.</div>
+
+      <div class="ns">5. სამედიცინო მომსახურეობაზე უარის თქმის მოსალოდნელი შედეგების შესახებ:</div>
+      <div class="ns-body">დაავადების პროგრესირება, რეინსულტი, სრული ინვალიდიზაცია, სასიცოცხლო ფუნქციების მოშლა, შესაძლო ლეტალური (სასიკვდილო) გამოსავალი.</div>
+
+      <div class="ns">6. ფინანსური და სოციალური საკითხის შესახებ:</div>
+      <div class="ns-body">დეტალურ ინფორმაციას მომაწვდის ნეიროქირურგიული განყოფილების ფინანსური მენეჯერი. სამედიცინო მომსახურეობის ხარჯების <strong>90%</strong> დაფარავს სოციალური მომსახურეობის სააგენტო, ხოლო <strong>10%</strong>-ს — პაციენტი/ პაციენტის ოჯახის წევრები.</div>
+
+      <div class="hr"></div>
+
+      <div class="p">პაციენტს / პაციენტის ოჯახის წევრებს, პასუხი გაეცა ყველა სხვა საინტერესო შეკითხვაზე და ხელის მოწერით ადასტურებს, რომ ზემოთ ხსენებულთან დაკავშირებით პრეტენზიები არ გააჩნია:</div>
+
+      <div class="signature-grid">
+        <div class="signature-card">
+          <div class="fr"><label>ექიმი / ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="1" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
+          <div class="signature-row">
+            <div class="signature-slot">
+              <label>ხელმოწერა</label>
+              <span class="signature-line"></span>
+            </div>
+            <div class="signature-slot">
+              <label>თარიღი</label>
+              <input type="date" class="ul w-sm">
+            </div>
+          </div>
+        </div>
+        <div class="signature-card">
+          <div class="fr"><label>პაციენტის ნათესავის / კანონიერი წარმომადგენლის სახელი გვარი</label><input type="text" class="ul w-lg"></div>
+          <div class="signature-slot" style="margin-top:14px;">
+            <label>ხელმოწერა (თუ პაციენტი ვერ შემოდის კონტაქტში)</label>
+            <span class="signature-line"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="warn">
+        <strong>პაციენტი არ არის თანახმა შეთავაზებულ მკურნალობაზე</strong>, რასაც ადასტურებს საკუთარი ხელის მოწერით:
+        <div class="refusal-grid">
+          <div class="signature-slot">
+            <label>ხელმოწერა</label>
+            <span class="signature-line dashed"></span>
+          </div>
+          <div class="signature-slot">
+            <label>სახელი / გვარი</label>
+            <span class="signature-line dashed"></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  </div><!-- /doc-1 -->
 
-
-  <!-- ─────────────────────────────────────────
-       DOC 2 — 218-ე დადგ. (100%)
-  ───────────────────────────────────────── -->
+  <!-- DOC 2 -->
   <div class="doc-page" id="doc-2">
-  <div class="sheet">
-    <div class="hd-row">
-      <span class="bold">დანართი 13</span>
-      <span>სამედიცინო დოკუმენტაცია ფორმა NIV</span>
-    </div>
-
-    <div class="doc-title">
-      პაციენტის წერილობითი ინფორმაციული თანხმობა სამედიცინო<br>მომსახურეობის გაწევაზე
-    </div>
-
-    <div class="p">
-      მე,&nbsp;&nbsp;<input type="text" class="ul w-lg patient-f" data-doc="2" placeholder="სახელი / გვარი / პირადი ნომერი" oninput="onPatient(this)">&nbsp;&nbsp;
-      (პაციენტი,/ პაციენტის ოჯახის წევრი,/კანონიერი წარმომადგენელი (პირადი ნომერი)
-    </div>
-    <div class="p" style="padding-left:60px;">(სახელი/გვარი)</div>
-
-    <div class="p">ექიმი-ნევროლოგისგან სრულად და ამომწურავად, მივიღე ინფორმაცია სამედიცინო მომსახურეობის გაწევის შესახებ, მათ შორის:</div>
-
-    <div class="ns">1. სამედიცინო მომსახურეობის არსის და საჭიროების შესახებ:</div>
-    <div class="ns-body">აღნიშნული დიაგნოზი – თავის ტვინის ინფარქტი განვითარებული ცერებრული არტერიების დაუზუსტებელი ოკლუზიისა ან სტენოზის გამო – მოითხოვს გადაუდებელ სტაციონარულ მკურნალობას, დამატებით კლინიკო-ლაბორატორიულ კვლვებს, გადაუდებელ რეკანალიზაციურ თერაპიას.</div>
-
-    <div class="ns">2. სამედიცინო მომსახურეობის მოსალოდნელი შედეგების შესახებ:</div>
-    <div class="ns-body">ინსულტის განვითარებამდე არსებული სტატუსის აღდგენა, ინვალიდიზაციის ხარისხის შემცირების ან/და ნევროლოგიური დეფიციტის სრულად/ნაწილობრივ აღდგენის ან სტაბილიზაციის მიზნით. ჰემოდინამიკის სტაბილიზირება, ვიტალური ფუნქციების სტაბილიზაცია.</div>
-
-    <div class="ns">3. პაციენტის ჯანმრთელობის და სიცოცხლისათვის ამ მომსახურებასთან დაკავშირებული რისკის შესახებ:</div>
-    <div class="ns-body">მედიკამენტოზური ალერგია, გასტრო-ინტესტინალური სისხლდენა, იშემიური ინსულტის განმეორება, სასიცოცხლო ფუნქციების მოშლა, ჰემორაგიული ინსულტი ან/და ლეტალური გამოსავალი. ინვაზიური პროცედურების ჩატარების დროს: შარდის ბუშტის კათეტერიზაცია — ჰემატურია, საშარდე გზების ინფექციის რისკის მომატება, პერიფერიული ვენური კათეტერი — ფლებიტი, ართერიული ხაზი — ჰემატომა.</div>
-
-    <div class="ns">4. განზრახული სამედიცინო მომსახურებების, სხვა ალტერნატული ვარიანტებისა, მათი თანმხლები რისკისა და შესაძლო ეფექტების შესახებ:</div>
-    <div class="ns-body">პაციენტი საჭიროებს ინსულტის მწვავე თერაპიას — თრომბოლიზისის/თრომბექტომიის ჩატარებას. ინფორმირებული ვარ, რომ ზემოთ აღნიშნული თერაპიის ეფექტურობა დამოკიდებულია დროზე ინსულტის სიმპტომების დაწყებიდან.</div>
-
-    <div class="ns">5. სამედიცინო მომსახურეობაზე უარის თქმის მოსალოდნელი შედეგების შესახებ:</div>
-    <div class="ns-body">დაავადების პროგრესირება, რეინსულტი, სრული ინვალიდიზაცია, სასიცოცხლო ფუნქციების მოშლა, შესაძლო ლეტალური (სასიკვდილო) გამოსავალი.</div>
-
-    <div class="ns">6. ფინანსური და სოციალური საკითხის შესახებ:</div>
-    <div class="ns-body">დეტალურ ინფორმაციას მომაწვდის ნეიროქირურგიული განყოფილების ფინანსური მენეჯერი. სამედიცინო მომსახურეობის ხარჯების <strong>100%</strong> დაფარავს სოციალური მომსახურეობის სააგენტო.</div>
-
-    <div class="hr"></div>
-
-    <div class="p">პაციენტს / პაციენტის ოჯახის წევრებს, პასუხი გაეცა ყველა სხვა საინტერესო შეკითხვაზე და ხელის მოწერით ადასტურებს, რომ ზემოთ ხსენებულთან დაკავშირებით პრეტენზიები არ გააჩნია:</div>
-
-    <div class="cols2" style="margin-top:18px;">
-      <div class="col">
-        <div class="fr"><label>ექიმი / ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="2" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
-        <div class="fr" style="margin-top:14px;"><label>ხელმოწერა</label><span class="dash xl"></span></div>
-        <div class="fr" style="margin-top:14px;"><label>თარიღი</label><input type="date" class="ul w-sm"></div>
+    <div class="sheet">
+      <div class="hd-row">
+        <span class="bold">დანართი 13</span>
+        <span>სამედიცინო დოკუმენტაცია ფორმა NIV</span>
       </div>
-      <div class="col">
-        <div class="fr"><label>პაციენტის ნათესავის / კანონიერი წარმომადგენლის სახელი გვარი</label><input type="text" class="ul w-lg"></div>
-        <div class="fr" style="margin-top:14px;"><label>ხელმოწერა (თუ პაციენტი ვერ შემოდის კონტაქტში)</label><span class="dash xl"></span></div>
-      </div>
-    </div>
 
-    <div class="hr"></div>
-    <div class="warn">
-      <strong>პაციენტი არ არის თანახმა შეთავაზებულ მკურნალობაზე</strong>, რასაც ადასტურებს საკუთარი ხელის მოწერით:<br><br>
-      ხელმოწერა:&nbsp;<span class="dash lg"></span>&nbsp;&nbsp;&nbsp;სახელი/გვარი:&nbsp;<span class="dash lg"></span>
+      <div class="doc-title">
+        პაციენტის წერილობითი ინფორმაციული თანხმობა სამედიცინო<br>მომსახურეობის გაწევაზე
+      </div>
+
+      <div class="p">
+        მე,&nbsp;&nbsp;<input type="text" class="ul w-lg patient-f" data-doc="2" placeholder="სახელი / გვარი / პირადი ნომერი" oninput="onPatient(this)">&nbsp;&nbsp;
+        (პაციენტი,/ პაციენტის ოჯახის წევრი,/კანონიერი წარმომადგენელი (პირადი ნომერი)
+      </div>
+
+      <div class="p">ექიმი-ნევროლოგისგან სრულად და ამომწურავად, მივიღე ინფორმაცია სამედიცინო მომსახურეობის გაწევის შესახებ, მათ შორის:</div>
+
+      <div class="ns">1. სამედიცინო მომსახურეობის არსის და საჭიროების შესახებ:</div>
+      <div class="ns-body">აღნიშნული დიაგნოზი – თავის ტვინის ინფარქტი განვითარებული ცერებრული არტერიების დაუზუსტებელი ოკლუზიისა ან სტენოზის გამო – მოითხოვს გადაუდებელ სტაციონარულ მკურნალობას, დამატებით კლინიკო-ლაბორატორიულ კვლვებს, გადაუდებელ რეკანალიზაციურ თერაპიას.</div>
+
+      <div class="ns">2. სამედიცინო მომსახურეობის მოსალოდნელი შედეგების შესახებ:</div>
+      <div class="ns-body">ინსულტის განვითარებამდე არსებული სტატუსის აღდგენა, ინვალიდიზაციის ხარისხის შემცირების ან/და ნევროლოგიური დეფიციტის სრულად/ნაწილობრივ აღდგენის ან სტაბილიზაციის მიზნით. ჰემოდინამიკის სტაბილიზირება, ვიტალური ფუნქციების სტაბილიზაცია.</div>
+
+      <div class="ns">3. პაციენტის ჯანმრთელობის და სიცოცხლისათვის ამ მომსახურებასთან დაკავშირებული რისკის შესახებ:</div>
+      <div class="ns-body">მედიკამენტოზური ალერგია, გასტრო-ინტესტინალური სისხლდენა, იშემიური ინსულტის განმეორება, სასიცოცხლო ფუნქციების მოშლა, ჰემორაგიული ინსულტი ან/და ლეტალური გამოსავალი. ინვაზიური პროცედურების ჩატარების დროს: შარდის ბუშტის კათეტერიზაცია — ჰემატურია, საშარდე გზების ინფექციის რისკის მომატება, პერიფერიული ვენური კათეტერი — ფლებიტი, ართერიული ხაზი — ჰემატომა.</div>
+
+      <div class="ns">4. განზრახული სამედიცინო მომსახურებების, სხვა ალტერნატული ვარიანტებისა, მათი თანმხლები რისკისა და შესაძლო ეფექტების შესახებ:</div>
+      <div class="ns-body">პაციენტი საჭიროებს ინსულტის მწვავე თერაპიას — თრომბოლიზისის/თრომბექტომიის ჩატარებას. ინფორმირებული ვარ, რომ ზემოთ აღნიშნული თერაპიის ეფექტურობა დამოკიდებულია დროზე ინსულტის სიმპტომების დაწყებიდან.</div>
+
+      <div class="ns">5. სამედიცინო მომსახურეობაზე უარის თქმის მოსალოდნელი შედეგების შესახებ:</div>
+      <div class="ns-body">დაავადების პროგრესირება, რეინსულტი, სრული ინვალიდიზაცია, სასიცოცხლო ფუნქციების მოშლა, შესაძლო ლეტალური (სასიკვდილო) გამოსავალი.</div>
+
+      <div class="ns">6. ფინანსური და სოციალური საკითხის შესახებ:</div>
+      <div class="ns-body">დეტალურ ინფორმაციას მომაწვდის ნეიროქირურგიული განყოფილების ფინანსური მენეჯერი. სამედიცინო მომსახურეობის ხარჯების <strong>100%</strong> დაფარავს სოციალური მომსახურეობის სააგენტო.</div>
+
+      <div class="hr"></div>
+
+      <div class="p">პაციენტს / პაციენტის ოჯახის წევრებს, პასუხი გაეცა ყველა სხვა საინტერესო შეკითხვაზე და ხელის მოწერით ადასტურებს, რომ ზემოთ ხსენებულთან დაკავშირებით პრეტენზიები არ გააჩნია:</div>
+
+      <div class="signature-grid">
+        <div class="signature-card">
+          <div class="fr"><label>ექიმი / ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="2" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
+          <div class="signature-row">
+            <div class="signature-slot">
+              <label>ხელმოწერა</label>
+              <span class="signature-line"></span>
+            </div>
+            <div class="signature-slot">
+              <label>თარიღი</label>
+              <input type="date" class="ul w-sm">
+            </div>
+          </div>
+        </div>
+        <div class="signature-card">
+          <div class="fr"><label>პაციენტის ნათესავის / კანონიერი წარმომადგენლის სახელი გვარი</label><input type="text" class="ul w-lg"></div>
+          <div class="signature-slot" style="margin-top:14px;">
+            <label>ხელმოწერა (თუ პაციენტი ვერ შემოდის კონტაქტში)</label>
+            <span class="signature-line"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="warn">
+        <strong>პაციენტი არ არის თანახმა შეთავაზებულ მკურნალობაზე</strong>, რასაც ადასტურებს საკუთარი ხელის მოწერით:
+        <div class="refusal-grid">
+          <div class="signature-slot">
+            <label>ხელმოწერა</label>
+            <span class="signature-line dashed"></span>
+          </div>
+          <div class="signature-slot">
+            <label>სახელი / გვარი</label>
+            <span class="signature-line dashed"></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  </div><!-- /doc-2 -->
 
-
-  <!-- ─────────────────────────────────────────
-       DOC 3 — კერძო დაზღვევა
-  ───────────────────────────────────────── -->
+  <!-- DOC 3 -->
   <div class="doc-page" id="doc-3">
-  <div class="sheet">
-    <div class="hd-row">
-      <span class="bold">დანართი 13</span>
-      <span>სამედიცინო დოკუმენტაცია ფორმა NIV</span>
-    </div>
-
-    <div class="doc-title">
-      პაციენტის წერილობითი ინფორმაციული თანხმობა სამედიცინო<br>მომსახურეობის გაწევაზე
-    </div>
-
-    <div class="p">
-      მე,&nbsp;&nbsp;<input type="text" class="ul w-lg patient-f" data-doc="3" placeholder="სახელი / გვარი / პირადი ნომერი" oninput="onPatient(this)">&nbsp;&nbsp;
-      (პაციენტი,/ პაციენტის ოჯახის წევრი,/კანონიერი წარმომადგენელი (პირადი ნომერი)
-    </div>
-    <div class="p" style="padding-left:60px;">(სახელი/გვარი)</div>
-
-    <div class="p">ექიმი-ნევროლოგისგან სრულად და ამომწურავად, მივიღე ინფორმაცია სამედიცინო მომსახურეობის გაწევის შესახებ, მათ შორის:</div>
-
-    <div class="ns">1. სამედიცინო მომსახურეობის არსის და საჭიროების შესახებ:</div>
-    <div class="ns-body">აღნიშნული დიაგნოზი – თავის ტვინის ინფარქტი განვითარებული ცერებრული არტერიების დაუზუსტებელი ოკლუზიისა ან სტენოზის გამო – მოითხოვს გადაუდებელ სტაციონარულ მკურნალობას, დამატებით კლინიკო-ლაბორატორიულ კვლვებს, გადაუდებელ რეკანალიზაციურ თერაპიას.</div>
-
-    <div class="ns">2. სამედიცინო მომსახურეობის მოსალოდნელი შედეგების შესახებ:</div>
-    <div class="ns-body">ინსულტის განვითარებამდე არსებული სტატუსის აღდგენა, ინვალიდიზაციის ხარისხის შემცირების ან/და ნევროლოგიური დეფიციტის სრულად/ნაწილობრივ აღდგენის ან სტაბილიზაციის მიზნით. ჰემოდინამიკის სტაბილიზირება, ვიტალური ფუნქციების სტაბილიზაცია.</div>
-
-    <div class="ns">3. პაციენტის ჯანმრთელობის და სიცოცხლისათვის ამ მომსახურებასთან დაკავშირებული რისკის შესახებ:</div>
-    <div class="ns-body">მედიკამენტოზური ალერგია, გასტრო-ინტესტინალური სისხლდენა, იშემიური ინსულტის განმეორება, სასიცოცხლო ფუნქციების მოშლა, ჰემორაგიული ინსულტი ან/და ლეტალური გამოსავალი. ინვაზიური პროცედურების ჩატარების დროს: შარდის ბუშტის კათეტერიზაცია — ჰემატურია, საშარდე გზების ინფექციის რისკის მომატება, პერიფერიული ვენური კათეტერი — ფლებიტი, ართერიული ხაზი — ჰემატომა.</div>
-
-    <div class="ns">4. განზრახული სამედიცინო მომსახურებების, სხვა ალტერნატული ვარიანტებისა, მათი თანმხლები რისკისა და შესაძლო ეფექტების შესახებ:</div>
-    <div class="ns-body">პაციენტი საჭიროებს ინსულტის მწვავე თერაპიას — თრომბოლიზისის/თრომბექტომიის ჩატარებას. ინფორმირებული ვარ, რომ ზემოთ აღნიშნული თერაპიის ეფექტურობა დამოკიდებულია დროზე ინსულტის სიმპტომების დაწყებიდან.</div>
-
-    <div class="ns">5. სამედიცინო მომსახურეობაზე უარის თქმის მოსალოდნელი შედეგების შესახებ:</div>
-    <div class="ns-body">დაავადების პროგრესირება, რეინსულტი, სრული ინვალიდიზაცია, სასიცოცხლო ფუნქციების მოშლა, შესაძლო ლეტალური (სასიკვდილო) გამოსავალი.</div>
-
-    <div class="ns">6. ფინანსური და სოციალური საკითხის შესახებ:</div>
-    <div class="ns-body">დეტალურ ინფორმაციას მომაწვდის ნეიროქირურგიული განყოფილების ფინანსური მენეჯერი. სამედიცინო მომსახურეობის ხარჯებს სრულად ან ნაწილობრივ დაფარავს კერძო დაზღვევა ან პაციენტი/პაციენტის ოჯახის წევრი (სადაზღვევო კომპანიის მიერ დაუფინანსებელ ნაწილს).</div>
-
-    <div class="hr"></div>
-
-    <div class="p">პაციენტს / პაციენტის ოჯახის წევრებს, პასუხი გაეცა ყველა სხვა საინტერესო შეკითხვაზე და ხელის მოწერით ადასტურებს, რომ ზემოთ ხსენებულთან დაკავშირებით პრეტენზიები არ გააჩნია:</div>
-
-    <div class="cols2" style="margin-top:18px;">
-      <div class="col">
-        <div class="fr"><label>ექიმი / ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="3" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
-        <div class="fr" style="margin-top:14px;"><label>ხელმოწერა</label><span class="dash xl"></span></div>
-        <div class="fr" style="margin-top:14px;"><label>თარიღი</label><input type="date" class="ul w-sm"></div>
+    <div class="sheet">
+      <div class="hd-row">
+        <span class="bold">დანართი 13</span>
+        <span>სამედიცინო დოკუმენტაცია ფორმა NIV</span>
       </div>
-      <div class="col">
-        <div class="fr"><label>პაციენტის ნათესავის / კანონიერი წარმომადგენლის სახელი გვარი</label><input type="text" class="ul w-lg"></div>
-        <div class="fr" style="margin-top:14px;"><label>ხელმოწერა (თუ პაციენტი ვერ შემოდის კონტაქტში)</label><span class="dash xl"></span></div>
-      </div>
-    </div>
 
-    <div class="hr"></div>
-    <div class="warn">
-      <strong>პაციენტი არ არის თანახმა შეთავაზებულ მკურნალობაზე</strong>, რასაც ადასტურებს საკუთარი ხელის მოწერით:<br><br>
-      ხელმოწერა:&nbsp;<span class="dash lg"></span>&nbsp;&nbsp;&nbsp;სახელი/გვარი:&nbsp;<span class="dash lg"></span>
+      <div class="doc-title">
+        პაციენტის წერილობითი ინფორმაციული თანხმობა სამედიცინო<br>მომსახურეობის გაწევაზე
+      </div>
+
+      <div class="p">
+        მე,&nbsp;&nbsp;<input type="text" class="ul w-lg patient-f" data-doc="3" placeholder="სახელი / გვარი / პირადი ნომერი" oninput="onPatient(this)">&nbsp;&nbsp;
+        (პაციენტი,/ პაციენტის ოჯახის წევრი,/კანონიერი წარმომადგენელი (პირადი ნომერი)
+      </div>
+
+      <div class="p">ექიმი-ნევროლოგისგან სრულად და ამომწურავად, მივიღე ინფორმაცია სამედიცინო მომსახურეობის გაწევის შესახებ, მათ შორის:</div>
+
+      <div class="ns">1. სამედიცინო მომსახურეობის არსის და საჭიროების შესახებ:</div>
+      <div class="ns-body">აღნიშნული დიაგნოზი – თავის ტვინის ინფარქტი განვითარებული ცერებრული არტერიების დაუზუსტებელი ოკლუზიისა ან სტენოზის გამო – მოითხოვს გადაუდებელ სტაციონარულ მკურნალობას, დამატებით კლინიკო-ლაბორატორიულ კვლვებს, გადაუდებელ რეკანალიზაციურ თერაპიას.</div>
+
+      <div class="ns">2. სამედიცინო მომსახურეობის მოსალოდნელი შედეგების შესახებ:</div>
+      <div class="ns-body">ინსულტის განვითარებამდე არსებული სტატუსის აღდგენა, ინვალიდიზაციის ხარისხის შემცირების ან/და ნევროლოგიური დეფიციტის სრულად/ნაწილობრივ აღდგენის ან სტაბილიზაციის მიზნით. ჰემოდინამიკის სტაბილიზირება, ვიტალური ფუნქციების სტაბილიზაცია.</div>
+
+      <div class="ns">3. პაციენტის ჯანმრთელობის და სიცოცხლისათვის ამ მომსახურებასთან დაკავშირებული რისკის შესახებ:</div>
+      <div class="ns-body">მედიკამენტოზური ალერგია, გასტრო-ინტესტინალური სისხლდენა, იშემიური ინსულტის განმეორება, სასიცოცხლო ფუნქციების მოშლა, ჰემორაგიული ინსულტი ან/და ლეტალური გამოსავალი. ინვაზიური პროცედურების ჩატარების დროს: შარდის ბუშტის კათეტერიზაცია — ჰემატურია, საშარდე გზების ინფექციის რისკის მომატება, პერიფერიული ვენური კათეტერი — ფლებიტი, ართერიული ხაზი — ჰემატომა.</div>
+
+      <div class="ns">4. განზრახული სამედიცინო მომსახურებების, სხვა ალტერნატული ვარიანტებისა, მათი თანმხლები რისკისა და შესაძლო ეფექტების შესახებ:</div>
+      <div class="ns-body">პაციენტი საჭიროებს ინსულტის მწვავე თერაპიას — თრომბოლიზისის/თრომბექტომიის ჩატარებას. ინფორმირებული ვარ, რომ ზემოთ აღნიშნული თერაპიის ეფექტურობა დამოკიდებულია დროზე ინსულტის სიმპტომების დაწყებიდან.</div>
+
+      <div class="ns">5. სამედიცინო მომსახურეობაზე უარის თქმის მოსალოდნელი შედეგების შესახებ:</div>
+      <div class="ns-body">დაავადების პროგრესირება, რეინსულტი, სრული ინვალიდიზაცია, სასიცოცხლო ფუნქციების მოშლა, შესაძლო ლეტალური (სასიკვდილო) გამოსავალი.</div>
+
+      <div class="ns">6. ფინანსური და სოციალური საკითხის შესახებ:</div>
+      <div class="ns-body">დეტალურ ინფორმაციას მომაწვდის ნეიროქირურგიული განყოფილების ფინანსური მენეჯერი. სამედიცინო მომსახურეობის ხარჯებს სრულად ან ნაწილობრივ დაფარავს კერძო დაზღვევა ან პაციენტი/პაციენტის ოჯახის წევრი (სადაზღვევო კომპანიის მიერ დაუფინანსებელ ნაწილს).</div>
+
+      <div class="hr"></div>
+
+      <div class="p">პაციენტს / პაციენტის ოჯახის წევრებს, პასუხი გაეცა ყველა სხვა საინტერესო შეკითხვაზე და ხელის მოწერით ადასტურებს, რომ ზემოთ ხსენებულთან დაკავშირებით პრეტენზიები არ გააჩნია:</div>
+
+      <div class="signature-grid">
+        <div class="signature-card">
+          <div class="fr"><label>ექიმი / ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="3" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
+          <div class="signature-row">
+            <div class="signature-slot">
+              <label>ხელმოწერა</label>
+              <span class="signature-line"></span>
+            </div>
+            <div class="signature-slot">
+              <label>თარიღი</label>
+              <input type="date" class="ul w-sm">
+            </div>
+          </div>
+        </div>
+        <div class="signature-card">
+          <div class="fr"><label>პაციენტის ნათესავის / კანონიერი წარმომადგენლის სახელი გვარი</label><input type="text" class="ul w-lg"></div>
+          <div class="signature-slot" style="margin-top:14px;">
+            <label>ხელმოწერა (თუ პაციენტი ვერ შემოდის კონტაქტში)</label>
+            <span class="signature-line"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="warn">
+        <strong>პაციენტი არ არის თანახმა შეთავაზებულ მკურნალობაზე</strong>, რასაც ადასტურებს საკუთარი ხელის მოწერით:
+        <div class="refusal-grid">
+          <div class="signature-slot">
+            <label>ხელმოწერა</label>
+            <span class="signature-line dashed"></span>
+          </div>
+          <div class="signature-slot">
+            <label>სახელი / გვარი</label>
+            <span class="signature-line dashed"></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  </div><!-- /doc-3 -->
 
-
-  <!-- ─────────────────────────────────────────
-       DOC 4 — სკრინინგი
-  ───────────────────────────────────────── -->
+  <!-- DOC 4 -->
   <div class="doc-page" id="doc-4">
-  <div class="sheet">
-    <div class="doc-title" style="margin-top:0;">
-      სისტემური თრომბოლიზი<br>სკრინინგი
-    </div>
-
-    <div class="cols2">
-      <div class="col">
-        <div class="fr"><label>პაციენტის სახელი, გვარი, ასაკი</label><input type="text" class="ul w-xl patient-f" data-doc="4" placeholder="სახელი გვარი, ასაკი" oninput="onPatient(this)"></div>
-        <div class="fr" style="margin-top:10px;"><label>პაციენტის წონა (კგ)</label><input type="text" class="ul w-xs" placeholder="კგ"></div>
-        <div class="fr" style="margin-top:10px;"><label>კლინიკაში მოყვანილია</label><input type="text" class="ul w-sm" placeholder="___"></div>
+    <div class="sheet">
+      <div class="doc-title" style="margin-top:0;">
+        სისტემური თრომბოლიზი<br>სკრინინგი
       </div>
-      <div class="col">
-        <div class="fr"><label>სკრინინგის დაწყების დრო</label><input type="time" class="ul w-sm"></div>
-        <div class="fr" style="margin-top:10px;"><label>ინსულტის სიმპტომების დაწყების დრო</label><input type="datetime-local" class="ul"></div>
+
+      <div class="cols2">
+        <div class="col">
+          <div class="fr"><label>პაციენტის სახელი, გვარი, ასაკი</label><input type="text" class="ul w-xl patient-f" data-doc="4" placeholder="სახელი გვარი, ასაკი" oninput="onPatient(this)"></div>
+          <div class="fr" style="margin-top:10px;"><label>პაციენტის წონა (კგ)</label><input type="text" class="ul w-xs" placeholder="კგ"></div>
+          <div class="fr" style="margin-top:10px;"><label>კლინიკაში მოყვანილია</label><input type="text" class="ul w-sm"></div>
+        </div>
+        <div class="col">
+          <div class="fr"><label>სკრინინგის დაწყების დრო</label><input type="time" class="ul w-sm"></div>
+          <div class="fr" style="margin-top:10px;"><label>ინსულტის სიმპტომების დაწყების დრო</label><input type="datetime-local" class="ul"></div>
+        </div>
       </div>
-    </div>
 
-    <!-- INCLUSION -->
-    <div class="screen-section" style="margin-top:18px;">
-      <div class="screen-sec-title blue">ჩართვის კრიტერიუმები</div>
+      <div class="screen-section" style="margin-top:18px;">
+        <div class="screen-sec-title blue">ჩართვის კრიტერიუმები</div>
+        <div class="screen-item"><span class="si-text">ინსულტის სიმპტომების დაწყების დრო &lt;4,5 სთ</span><div class="yn"><label><input type="radio" name="s_i1" value="y"> დიახ</label><label><input type="radio" name="s_i1" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">ასაკი &gt;18 წ</span><div class="yn"><label><input type="radio" name="s_i2" value="y"> დიახ</label><label><input type="radio" name="s_i2" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">პაციენტი არ არის კომაში</span><div class="yn"><label><input type="radio" name="s_i3" value="y"> დიახ</label><label><input type="radio" name="s_i3" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">NIHSS &lt;20 ქულა</span><div class="yn"><label><input type="radio" name="s_i4" value="y"> დიახ</label><label><input type="radio" name="s_i4" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">TA სისტოლური &lt;180, დიასტოლური &lt;110 მმ ვწ</span><div class="yn"><label><input type="radio" name="s_i5" value="y"> დიახ</label><label><input type="radio" name="s_i5" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">CT კვლევით გამოირიცხა ინტრაცერებრული სისხლჩაქცევა</span><div class="yn"><label><input type="radio" name="s_i6" value="y"> დიახ</label><label><input type="radio" name="s_i6" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">CT კვლევით არ ვლინდება ინფარქტის კერა ASPECTS (მეტი 7-ზე)</span><div class="yn"><label><input type="radio" name="s_i7" value="y"> დიახ</label><label><input type="radio" name="s_i7" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">გლიკემია: &gt;50 მგ% და &lt;400 მგ%</span><div class="yn"><label><input type="radio" name="s_i8" value="y"> დიახ</label><label><input type="radio" name="s_i8" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">ტემპერატურა: &lt;37.5°C</span><div class="yn"><label><input type="radio" name="s_i9" value="y"> დიახ</label><label><input type="radio" name="s_i9" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">APTT ნორმის ფარგლებშია</span><div class="yn"><label><input type="radio" name="s_i10" value="y"> დიახ</label><label><input type="radio" name="s_i10" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">INR &lt;1.2 (ლაბ. ნორმის ზედა ზღვარის ქვემოთ)</span><div class="yn"><label><input type="radio" name="s_i11" value="y"> დიახ</label><label><input type="radio" name="s_i11" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">თრომბოციტები &gt;100 000</span><div class="yn"><label><input type="radio" name="s_i12" value="y"> დიახ</label><label><input type="radio" name="s_i12" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">LMWH ჰეპარინის თერაპიული დოზა ბოლო 24სთ-ში — არ მიუღია</span><div class="yn"><label><input type="radio" name="s_i13" value="y"> დიახ</label><label><input type="radio" name="s_i13" value="n"> არა</label></div></div>
+      </div>
+      <div class="info-note">თუ ყველა პასუხი დადებითია — გააგრძელეთ კითხვარის შევსება.</div>
 
-      <div class="screen-item"><span class="si-text">ინსულტის სიმპტომების დაწყების დრო &lt;4,5 სთ</span><div class="yn"><label><input type="radio" name="s_i1" value="y"> დიახ</label><label><input type="radio" name="s_i1" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">ასაკი &gt;18 წ</span><div class="yn"><label><input type="radio" name="s_i2" value="y"> დიახ</label><label><input type="radio" name="s_i2" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">პაციენტი არ არის კომაში</span><div class="yn"><label><input type="radio" name="s_i3" value="y"> დიახ</label><label><input type="radio" name="s_i3" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">NIHSS &lt;20 ქულა</span><div class="yn"><label><input type="radio" name="s_i4" value="y"> დიახ</label><label><input type="radio" name="s_i4" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">TA სისტოლური &lt;180, დიასტოლური &lt;110 მმ ვწ</span><div class="yn"><label><input type="radio" name="s_i5" value="y"> დიახ</label><label><input type="radio" name="s_i5" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">CT კვლევით გამოირიცხა ინტრაცერებრული სისხლჩაქცევა</span><div class="yn"><label><input type="radio" name="s_i6" value="y"> დიახ</label><label><input type="radio" name="s_i6" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">CT კვლევით არ ვლინდება ინფარქტის კერა ASPECTS (მეტი 7-ზე)</span><div class="yn"><label><input type="radio" name="s_i7" value="y"> დიახ</label><label><input type="radio" name="s_i7" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">გლიკემია: &gt;50 მგ% და &lt;400 მგ%</span><div class="yn"><label><input type="radio" name="s_i8" value="y"> დიახ</label><label><input type="radio" name="s_i8" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">ტემპერატურა: &lt;37.5°C</span><div class="yn"><label><input type="radio" name="s_i9" value="y"> დიახ</label><label><input type="radio" name="s_i9" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">APTT ნორმის ფარგლებშია</span><div class="yn"><label><input type="radio" name="s_i10" value="y"> დიახ</label><label><input type="radio" name="s_i10" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">INR &lt;1.2 (ლაბ. ნორმის ზედა ზღვარის ქვემოთ)</span><div class="yn"><label><input type="radio" name="s_i11" value="y"> დიახ</label><label><input type="radio" name="s_i11" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">თრომბოციტები &gt;100 000</span><div class="yn"><label><input type="radio" name="s_i12" value="y"> დიახ</label><label><input type="radio" name="s_i12" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">LMWH ჰეპარინის თერაპიული დოზა ბოლო 24სთ-ში — არ მიუღია</span><div class="yn"><label><input type="radio" name="s_i13" value="y"> დიახ</label><label><input type="radio" name="s_i13" value="n"> არა</label></div></div>
-    </div>
-    <div class="info-note">თუ ყველა პასუხი დადებითია — გააგრძელეთ კითხვარის შევსება.</div>
+      <div class="screen-section">
+        <div class="screen-sec-title red">აბსოლიტური უკუჩვენება</div>
+        <div class="screen-item"><span class="si-text">გლიკემია ამ მომენტისთვის: &lt;50 ან &gt;400 მგ%</span><div class="yn"><label><input type="radio" name="s_a1" value="y"> დიახ</label><label><input type="radio" name="s_a1" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">პაციენტი კომაშია</span><div class="yn"><label><input type="radio" name="s_a2" value="y"> დიახ</label><label><input type="radio" name="s_a2" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">გადატანილი ინტრაკრანიალური სისხლჩაქცევა</span><div class="yn"><label><input type="radio" name="s_a3" value="y"> დიახ</label><label><input type="radio" name="s_a3" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">ბაქტერიული ენდოკარდიტი, პერიკარდიტი, მენინგიტი</span><div class="yn"><label><input type="radio" name="s_a4" value="y"> დიახ</label><label><input type="radio" name="s_a4" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">ქირურგიული ჩარევა ბოლო 3 თვის ვადაში</span><div class="yn"><label><input type="radio" name="s_a5" value="y"> დიახ</label><label><input type="radio" name="s_a5" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">უროგენიტალური / გასტროინტესტინალური სისხლდენა</span><div class="yn"><label><input type="radio" name="s_a6" value="y"> დიახ</label><label><input type="radio" name="s_a6" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">მძიმე ქალა-ტვინის ტრავმა ბოლო 3 თვის ვადაში</span><div class="yn"><label><input type="radio" name="s_a7" value="y"> დიახ</label><label><input type="radio" name="s_a7" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">ბოლო 7 დღის განმავლობაში ლუმბალური / არტერიის პუნქცია</span><div class="yn"><label><input type="radio" name="s_a8" value="y"> დიახ</label><label><input type="radio" name="s_a8" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">ბოლო 1 თვის განმავლობაში ნებისმიერი ხარისხის ტრავმა</span><div class="yn"><label><input type="radio" name="s_a9" value="y"> დიახ</label><label><input type="radio" name="s_a9" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">CT კვლევით — დიდი ზომის დაზიანება (MCA territory &gt;1/3)</span><div class="yn"><label><input type="radio" name="s_a10" value="y"> დიახ</label><label><input type="radio" name="s_a10" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">ორსულობა / მშობიარობა ბოლო 10 დღეში</span><div class="yn"><label><input type="radio" name="s_a11" value="y"> დიახ</label><label><input type="radio" name="s_a11" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">ბოლო 24 საათში: LMWH, vit K ანტაგონისტი (ვარფარინი)</span><div class="yn"><label><input type="radio" name="s_a12" value="y"> დიახ</label><label><input type="radio" name="s_a12" value="n"> არა</label></div></div>
+      </div>
 
-    <!-- ABSOLUTE CI -->
-    <div class="screen-section">
-      <div class="screen-sec-title red">აბსოლიტური უკუჩვენება</div>
-      <div class="screen-item"><span class="si-text">გლიკემია ამ მომენტისთვის: &lt;50 ან &gt;400 მგ%</span><div class="yn"><label><input type="radio" name="s_a1" value="y"> დიახ</label><label><input type="radio" name="s_a1" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">პაციენტი კომაშია</span><div class="yn"><label><input type="radio" name="s_a2" value="y"> დიახ</label><label><input type="radio" name="s_a2" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">გადატანილი ინტრაკრანიალური სისხლჩაქცევა</span><div class="yn"><label><input type="radio" name="s_a3" value="y"> დიახ</label><label><input type="radio" name="s_a3" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">ბაქტერიული ენდოკარდიტი, პერიკარდიტი, მენინგიტი</span><div class="yn"><label><input type="radio" name="s_a4" value="y"> დიახ</label><label><input type="radio" name="s_a4" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">ქირურგიული ჩარევა ბოლო 3 თვის ვადაში</span><div class="yn"><label><input type="radio" name="s_a5" value="y"> დიახ</label><label><input type="radio" name="s_a5" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">უროგენიტალური / გასტროინტესტინალური სისხლდენა</span><div class="yn"><label><input type="radio" name="s_a6" value="y"> დიახ</label><label><input type="radio" name="s_a6" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">მძიმე ქალა-ტვინის ტრავმა ბოლო 3 თვის ვადაში</span><div class="yn"><label><input type="radio" name="s_a7" value="y"> დიახ</label><label><input type="radio" name="s_a7" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">ბოლო 7 დღის განმავლობაში ლუმბალური / არტერიის პუნქცია</span><div class="yn"><label><input type="radio" name="s_a8" value="y"> დიახ</label><label><input type="radio" name="s_a8" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">ბოლო 1 თვის განმავლობაში ნებისმიერი ხარისხის ტრავმა</span><div class="yn"><label><input type="radio" name="s_a9" value="y"> დიახ</label><label><input type="radio" name="s_a9" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">CT კვლევით — დიდი ზომის დაზიანება (MCA territory &gt;1/3)</span><div class="yn"><label><input type="radio" name="s_a10" value="y"> დიახ</label><label><input type="radio" name="s_a10" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">ორსულობა / მშობიარობა ბოლო 10 დღეში</span><div class="yn"><label><input type="radio" name="s_a11" value="y"> დიახ</label><label><input type="radio" name="s_a11" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">ბოლო 24 საათში: LMWH, vit K ანტაგონისტი (ვარფარინი)</span><div class="yn"><label><input type="radio" name="s_a12" value="y"> დიახ</label><label><input type="radio" name="s_a12" value="n"> არა</label></div></div>
-    </div>
+      <div class="screen-section">
+        <div class="screen-sec-title amber">შედარებითი უკუჩვენება</div>
+        <div class="screen-item"><span class="si-text">ასაკი 80+, სიმპტომების დაწყების დრო &gt;3 სთ</span><div class="yn"><label><input type="radio" name="s_r1" value="y"> დიახ</label><label><input type="radio" name="s_r1" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">ბოლო 3 თვის განმავლობაში გადატანილი იშემიური ინსულტი</span><div class="yn"><label><input type="radio" name="s_r2" value="y"> დიახ</label><label><input type="radio" name="s_r2" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">ინსულტის დასაწყისი უცნობია (Wake-up stroke)</span><div class="yn"><label><input type="radio" name="s_r3" value="y"> დიახ</label><label><input type="radio" name="s_r3" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">მსუბუქი სიმპტომატიკა, რომელიც სწრაფად გაუმჯობესდა</span><div class="yn"><label><input type="radio" name="s_r4" value="y"> დიახ</label><label><input type="radio" name="s_r4" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">პაციენტს აღენიშნა გულყრა / კრუნჩხვა სიმპტომების დაწყებისას</span><div class="yn"><label><input type="radio" name="s_r5" value="y"> დიახ</label><label><input type="radio" name="s_r5" value="n"> არა</label></div></div>
+        <div class="screen-item"><span class="si-text">პაციენტს მიღებული აქვს ბოლო 48 საათში DOAC, NOAC</span><div class="yn"><label><input type="radio" name="s_r6" value="y"> დიახ</label><label><input type="radio" name="s_r6" value="n"> არა</label></div></div>
+      </div>
+      <div class="info-note">თუ ყველა აბსოლიტური უკუჩვენება უარყოფითია — პაციენტს შეიძლება ჩაუტარდეს სისტემური ი/ვ თრომბოლიზური თერაპია. შედარებითი უკუჩვენების დროს ინდივიდუალურად შეფასდება თრომბოლიზისის რისკი და სარგებელი.</div>
 
-    <!-- RELATIVE CI -->
-    <div class="screen-section">
-      <div class="screen-sec-title amber">შედარებითი უკუჩვენება</div>
-      <div class="screen-item"><span class="si-text">ასაკი 80+, სიმპტომების დაწყების დრო &gt;3 სთ</span><div class="yn"><label><input type="radio" name="s_r1" value="y"> დიახ</label><label><input type="radio" name="s_r1" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">ბოლო 3 თვის განმავლობაში გადატანილი იშემიური ინსულტი</span><div class="yn"><label><input type="radio" name="s_r2" value="y"> დიახ</label><label><input type="radio" name="s_r2" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">ინსულტის დასაწყისი უცნობია (Wake-up stroke)</span><div class="yn"><label><input type="radio" name="s_r3" value="y"> დიახ</label><label><input type="radio" name="s_r3" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">მსუბუქი სიმპტომატიკა, რომელიც სწრაფად გაუმჯობესდა</span><div class="yn"><label><input type="radio" name="s_r4" value="y"> დიახ</label><label><input type="radio" name="s_r4" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">პაციენტს აღენიშნა გულყრა / კრუნჩხვა სიმპტომების დაწყებისას</span><div class="yn"><label><input type="radio" name="s_r5" value="y"> დიახ</label><label><input type="radio" name="s_r5" value="n"> არა</label></div></div>
-      <div class="screen-item"><span class="si-text">პაციენტს მიღებული აქვს ბოლო 48 საათში DOAC, NOAC</span><div class="yn"><label><input type="radio" name="s_r6" value="y"> დიახ</label><label><input type="radio" name="s_r6" value="n"> არა</label></div></div>
-    </div>
-    <div class="info-note">თუ ყველა აბსოლიტური უკუჩვენება უარყოფითია — პაციენტს შეიძლება ჩაუტარდეს სისტემური ი/ვ თრომბოლიზური თერაპია. შედარებითი უკუჩვენების დროს ინდივიდუალურად შეფასდება თრომბოლიზისის რისკი და სარგებელი.</div>
+      <div class="hr"></div>
 
-    <div class="hr"></div>
-
-    <div class="cols2">
-      <div class="col">
-        <div class="fr"><label>პაციენტის / ოჯახის წევრის ინფ. თანხმობაზე ხელმოწერა</label>
-          <div style="display:flex;gap:16px;margin-top:6px;">
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="radio" name="s_consent"> დიახ</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="radio" name="s_consent"> არა</label>
+      <div class="cols2">
+        <div class="col">
+          <div class="fr"><label>პაციენტის / ოჯახის წევრის ინფ. თანხმობაზე ხელმოწერა</label>
+            <div style="display:flex;gap:16px;margin-top:6px;">
+              <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="radio" name="s_consent"> დიახ</label>
+              <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="radio" name="s_consent"> არა</label>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="fr"><label>ნევროლოგის თანხმობა</label>
+            <div style="display:flex;gap:16px;margin-top:6px;">
+              <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="radio" name="s_neuro"> დიახ</label>
+              <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="radio" name="s_neuro"> არა</label>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="fr"><label>ნევროლოგის თანხმობა</label>
-          <div style="display:flex;gap:16px;margin-top:6px;">
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="radio" name="s_neuro"> დიახ</label>
-            <label style="display:flex;align-items:center;gap:5px;cursor:pointer;"><input type="radio" name="s_neuro"> არა</label>
+
+      <div class="cols2" style="margin-top:12px;">
+        <div class="col">
+          <div class="fr"><label>ალტეპლაზის (rTPA) ი/ვ დოზა (0.9 მგ/კგ, არაუმეტეს 90 მგ)</label><input type="text" class="ul w-sm" placeholder="მლ"></div>
+          <div style="display:flex;gap:20px;margin-top:10px;">
+            <div class="fr"><label>ბოლუსით</label><input type="text" class="ul w-xs" placeholder="მლ"></div>
+            <div class="fr"><label>ინფუზით</label><input type="text" class="ul w-xs" placeholder="მლ/სთ"></div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="cols2" style="margin-top:12px;">
-      <div class="col">
-        <div class="fr"><label>ალტეპლაზის (rTPA) ი/ვ დოზა (0.9 მგ/კგ, არაუმეტეს 90 მგ)</label><input type="text" class="ul w-sm" placeholder="მლ"></div>
-        <div style="display:flex;gap:20px;margin-top:10px;">
-          <div class="fr"><label>ბოლუსით</label><input type="text" class="ul w-xs" placeholder="მლ"></div>
-          <div class="fr"><label>ინფუზით</label><input type="text" class="ul w-xs" placeholder="მლ/სთ"></div>
+        <div class="col">
+          <div class="fr"><label>თრომბოლიზის დაწყების დრო</label><input type="time" class="ul w-sm"></div>
+          <div class="fr" style="margin-top:10px;"><label>ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="4" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
         </div>
-      </div>
-      <div class="col">
-        <div class="fr"><label>თრომბოლიზის დაწყების დრო</label><input type="time" class="ul w-sm"></div>
-        <div class="fr" style="margin-top:10px;"><label>ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="4" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
       </div>
     </div>
   </div>
-  </div><!-- /doc-4 -->
 
-
-  <!-- ─────────────────────────────────────────
-       DOC 5 — ოქმი
-  ───────────────────────────────────────── -->
+  <!-- DOC 5 -->
   <div class="doc-page" id="doc-5">
-  <div class="sheet">
-    <div class="doc-title" style="font-size:15px;">
-      ცენტრალური ვენური კათეტერის ან ვასკულარული საინექციო მიდგომის თრომბოლიზისი PHXX00
-    </div>
-
-    <div class="p center">ოქმი N&nbsp;<input type="text" class="ul w-xs" placeholder="____"></div>
-
-    <div class="cols2" style="margin-top:14px;">
-      <div class="col">
-        <div class="fr"><label>პაციენტის სახელი და გვარი</label><input type="text" class="ul w-xl patient-f" data-doc="5" placeholder="სახელი გვარი" oninput="onPatient(this)"></div>
-        <div class="fr" style="margin-top:10px;"><label>დაბადების თარიღი</label><input type="date" class="ul"></div>
-        <div class="fr" style="margin-top:10px;"><label>ბარათის ნომერი</label><input type="text" class="ul w-sm" placeholder="XXXXX/XX"></div>
+    <div class="sheet">
+      <div class="doc-title" style="font-size:15px;">
+        ცენტრალური ვენური კათეტერის ან ვასკულარული საინექციო მიდგომის თრომბოლიზისი PHXX00
       </div>
-      <div class="col">
-        <div class="fr"><label>პაციენტის წონა (კგ)</label><input type="text" class="ul w-xs" placeholder="კგ"></div>
-        <div class="fr" style="margin-top:10px;"><label>ალტეპლაზის (rTPA) ი/ვ დოზა (მლ)</label><input type="text" class="ul w-xs" placeholder="მლ"></div>
-        <div style="display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;">
-          <div class="fr"><label>ბოლუსით (მლ)</label><input type="text" class="ul w-xs" placeholder="მლ"></div>
-          <div class="fr"><label>ინფუზით (მლ/სთ)</label><input type="text" class="ul w-xs" placeholder="მლ/სთ"></div>
+
+      <div class="p center">ოქმი N <input type="text" class="ul w-xs" placeholder="____"></div>
+
+      <div class="cols2" style="margin-top:14px;">
+        <div class="col">
+          <div class="fr"><label>პაციენტის სახელი და გვარი</label><input type="text" class="ul w-xl patient-f" data-doc="5" placeholder="სახელი გვარი" oninput="onPatient(this)"></div>
+          <div class="fr" style="margin-top:10px;"><label>დაბადების თარიღი</label><input type="date" class="ul"></div>
+          <div class="fr" style="margin-top:10px;"><label>ბარათის ნომერი</label><input type="text" class="ul w-sm" placeholder="XXXXX/XX"></div>
+        </div>
+        <div class="col">
+          <div class="fr"><label>პაციენტის წონა (კგ)</label><input type="text" class="ul w-xs" placeholder="კგ"></div>
+          <div class="fr" style="margin-top:10px;"><label>ალტეპლაზის (rTPA) ი/ვ დოზა (მლ)</label><input type="text" class="ul w-xs" placeholder="მლ"></div>
+          <div style="display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;">
+            <div class="fr"><label>ბოლუსით (მლ)</label><input type="text" class="ul w-xs" placeholder="მლ"></div>
+            <div class="fr"><label>ინფუზით (მლ/სთ)</label><input type="text" class="ul w-xs" placeholder="მლ/სთ"></div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="hr"></div>
+      <div class="hr"></div>
 
-    <div style="overflow-x:auto;">
-      <table class="mon-table" id="mon-tbl">
-        <thead>
-          <tr>
-            <th style="width:32%;">დრო / ნევროლ. სტატუსი (GCS, NIHSS)</th>
-            <th style="width:14%;">გლიკემია (მგ/დლ)</th>
-            <th style="width:26%;">სასიცოცხლო მაჩვ.<br><small>TA / HR / SpO2 / RR / T</small></th>
-            <th style="width:28%;">მედიკამენტი / შენიშვნა</th>
-          </tr>
-        </thead>
-        <tbody id="mon-body">
-          <!-- rows built by JS -->
-        </tbody>
-      </table>
-    </div>
-    <button class="add-row-btn" onclick="addMonRow()">+ სტრიქონის დამატება</button>
-
-    <div class="hr" style="margin-top:14px;"></div>
-
-    <div class="cols2">
-      <div class="col">
-        <div class="fr"><label>ჩარევის თარიღი</label><input type="date" class="ul"></div>
-        <div class="fr" style="margin-top:10px;"><label>დაწყების დრო</label><input type="time" class="ul w-sm"></div>
-        <div class="fr" style="margin-top:10px;"><label>დასრულების დრო</label><input type="time" class="ul w-sm"></div>
+      <div style="overflow-x:auto;">
+        <table class="mon-table" id="mon-tbl">
+          <thead>
+            <tr>
+              <th style="width:32%;">დრო / ნევროლ. სტატუსი (GCS, NIHSS)</th>
+              <th style="width:14%;">გლიკემია (მგ/დლ)</th>
+              <th style="width:26%;">სასიცოცხლო მაჩვ.<br><small>TA / HR / SpO2 / RR / T</small></th>
+              <th style="width:28%;">მედიკამენტი / შენიშვნა</th>
+            </tr>
+          </thead>
+          <tbody id="mon-body"></tbody>
+        </table>
       </div>
-      <div class="col">
-        <div class="fr" style="margin-top:4px;"><label>შედეგი</label>
-          <div style="margin-top:6px;display:flex;flex-direction:column;gap:8px;">
-            <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;"><input type="radio" name="oq_result" value="ok"> თრომბოლიზისი დასრულდა გართულების გარეშე</label>
-            <label style="display:flex;align-items:flex-start;gap:7px;cursor:pointer;font-size:13px;">
-              <input type="radio" name="oq_result" value="compl" style="margin-top:3px;"> გართულება:&nbsp;<input type="text" class="ul w-md" placeholder="აღწერეთ">
-            </label>
+      <button class="add-row-btn" onclick="addMonRow()">+ სტრიქონის დამატება</button>
+
+      <div class="hr" style="margin-top:14px;"></div>
+
+      <div class="cols2">
+        <div class="col">
+          <div class="fr"><label>ჩარევის თარიღი</label><input type="date" class="ul"></div>
+          <div class="fr" style="margin-top:10px;"><label>დაწყების დრო</label><input type="time" class="ul w-sm"></div>
+          <div class="fr" style="margin-top:10px;"><label>დასრულების დრო</label><input type="time" class="ul w-sm"></div>
+        </div>
+        <div class="col">
+          <div class="fr" style="margin-top:4px;"><label>შედეგი</label>
+            <div style="margin-top:6px;display:flex;flex-direction:column;gap:8px;">
+              <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;"><input type="radio" name="oq_result" value="ok"> თრომბოლიზისი დასრულდა გართულების გარეშე</label>
+              <label style="display:flex;align-items:flex-start;gap:7px;cursor:pointer;font-size:13px;">
+                <input type="radio" name="oq_result" value="compl" style="margin-top:3px;"> გართულება: <input type="text" class="ul w-md" placeholder="აღწერეთ">
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="signature-grid" style="margin-top:16px;">
+        <div class="signature-card">
+          <div class="fr"><label>ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="5" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
+          <div class="signature-slot" style="margin-top:12px;">
+            <label>ხელმოწერა</label>
+            <span class="signature-line"></span>
+          </div>
+        </div>
+        <div class="signature-card">
+          <div class="fr"><label>გადაუდებელი მედიცინის დეპარტამენტის ექიმი</label><input type="text" class="ul w-md" placeholder="სახელი გვარი"></div>
+          <div class="signature-slot" style="margin-top:12px;">
+            <label>ხელმოწერა</label>
+            <span class="signature-line"></span>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="cols2" style="margin-top:16px;">
-      <div class="col">
-        <div class="fr"><label>ნევროლოგი</label><input type="text" class="ul w-md doctor-f" data-doc="5" placeholder="სახელი გვარი" oninput="onDoctor(this)"></div>
-        <div class="fr" style="margin-top:12px;"><label>ხელმოწერა</label><span class="dash xl"></span></div>
-      </div>
-      <div class="col">
-        <div class="fr"><label>გადაუდებელი დახმარების მედიცინის ექიმი</label><input type="text" class="ul w-md" placeholder="სახელი გვარი"></div>
-        <div class="fr" style="margin-top:12px;"><label>ხელმოწერა</label><span class="dash xl"></span></div>
-      </div>
-    </div>
   </div>
-  </div><!-- /doc-5 -->
-
-</div><!-- /viewer -->
+</div>
 
 <script>
 const TITLES = [
@@ -829,89 +1386,106 @@ const TITLES = [
   'თრომბოლიზისის ოქმი (მონიტორინგი)'
 ];
 
+const WIDTH_CLASSES = ['w-xs', 'w-sm', 'w-md', 'w-lg', 'w-xl', 'w-full'];
+const MON_ROWS = ['საწყისი', '+15 წუთი', '+15 წუთი', '+15 წუთი', '+15 წუთი'];
+
 let cur = -1;
 let monInit = false;
 
-/* ── Navigation ── */
 function openDoc(idx) {
   document.getElementById('toc-screen').style.display = 'none';
   document.getElementById('viewer').style.display = 'block';
-  document.querySelectorAll('.doc-page').forEach(d => d.classList.remove('active'));
-  document.getElementById('doc-' + idx).classList.add('active');
+  document.querySelectorAll('.doc-page').forEach((page) => page.classList.remove('active'));
+  document.getElementById(`doc-${idx}`).classList.add('active');
   cur = idx;
   document.getElementById('vbar-title').textContent = TITLES[idx];
+  document.title = `${TITLES[idx]} — თრომბექტომია / ლიზისი`;
 
-  // sync fields from global
-  const p = document.getElementById('g-patient').value;
-  const d = document.getElementById('g-doctor').value;
-  document.getElementById('b-patient').value = p;
-  document.getElementById('b-doctor').value = d;
-  fillAll(p, d);
+  const patient = document.getElementById('g-patient').value;
+  const doctor = document.getElementById('g-doctor').value;
+  document.getElementById('b-patient').value = patient;
+  document.getElementById('b-doctor').value = doctor;
+  fillAll(patient, doctor);
 
-  if (idx === 5 && !monInit) { buildMonTable(); monInit = true; }
+  if (idx === 5 && !monInit) {
+    buildMonTable();
+    monInit = true;
+  }
+
+  preparePrintMirrors(document.getElementById(`doc-${idx}`));
+  syncPrintMirrors(document.getElementById(`doc-${idx}`));
   window.scrollTo(0, 0);
 }
 
 function showTOC() {
   document.getElementById('viewer').style.display = 'none';
   document.getElementById('toc-screen').style.display = 'flex';
-  document.querySelectorAll('.doc-page').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.doc-page').forEach((page) => page.classList.remove('active'));
   cur = -1;
+  document.title = 'თრომბექტომია / ლიზისი — დოკუმენტები';
 }
 
-/* ── Field sync ── */
-function fillAll(p, d) {
-  document.querySelectorAll('.patient-f').forEach(el => { if (!el._focused) el.value = p; });
-  document.querySelectorAll('.doctor-f').forEach(el => { if (!el._focused) el.value = d; });
+function fillAll(patient, doctor) {
+  document.querySelectorAll('.patient-f').forEach((el) => {
+    if (!el._focused) el.value = patient;
+  });
+  document.querySelectorAll('.doctor-f').forEach((el) => {
+    if (!el._focused) el.value = doctor;
+  });
+  syncPrintMirrors();
 }
 
 function propagate() {
-  const p = document.getElementById('g-patient').value;
-  const d = document.getElementById('g-doctor').value;
-  document.getElementById('b-patient').value = p;
-  document.getElementById('b-doctor').value = d;
-  fillAll(p, d);
+  const patient = document.getElementById('g-patient').value;
+  const doctor = document.getElementById('g-doctor').value;
+  document.getElementById('b-patient').value = patient;
+  document.getElementById('b-doctor').value = doctor;
+  fillAll(patient, doctor);
 }
 
 function syncBar(type) {
   if (type === 'patient') {
-    const v = document.getElementById('b-patient').value;
-    document.getElementById('g-patient').value = v;
-    document.querySelectorAll('.patient-f').forEach(el => { if (!el._focused) el.value = v; });
+    const value = document.getElementById('b-patient').value;
+    document.getElementById('g-patient').value = value;
+    document.querySelectorAll('.patient-f').forEach((el) => {
+      if (!el._focused) el.value = value;
+    });
   } else {
-    const v = document.getElementById('b-doctor').value;
-    document.getElementById('g-doctor').value = v;
-    document.querySelectorAll('.doctor-f').forEach(el => { if (!el._focused) el.value = v; });
+    const value = document.getElementById('b-doctor').value;
+    document.getElementById('g-doctor').value = value;
+    document.querySelectorAll('.doctor-f').forEach((el) => {
+      if (!el._focused) el.value = value;
+    });
   }
+  syncPrintMirrors();
 }
 
 function onPatient(el) {
   document.getElementById('g-patient').value = el.value;
   document.getElementById('b-patient').value = el.value;
-  document.querySelectorAll('.patient-f').forEach(f => { if (f !== el && !f._focused) f.value = el.value; });
+  document.querySelectorAll('.patient-f').forEach((field) => {
+    if (field !== el && !field._focused) field.value = el.value;
+  });
+  syncPrintMirrors();
 }
+
 function onDoctor(el) {
   document.getElementById('g-doctor').value = el.value;
   document.getElementById('b-doctor').value = el.value;
-  document.querySelectorAll('.doctor-f').forEach(f => { if (f !== el && !f._focused) f.value = el.value; });
+  document.querySelectorAll('.doctor-f').forEach((field) => {
+    if (field !== el && !field._focused) field.value = el.value;
+  });
+  syncPrintMirrors();
 }
-
-document.addEventListener('focusin', e => { if (e.target.tagName === 'INPUT') e.target._focused = true; });
-document.addEventListener('focusout', e => { if (e.target.tagName === 'INPUT') e.target._focused = false; });
-
-/* ── Monitoring table ── */
-const MON_ROWS = [
-  'საწყისი','+15 წუთი','+15 წუთი','+15 წუთი','+15 წუთი'
-];
 
 function buildMonTable() {
-  const tb = document.getElementById('mon-body');
-  MON_ROWS.forEach(label => appendMonRow(tb, label));
+  const body = document.getElementById('mon-body');
+  MON_ROWS.forEach((label) => appendMonRow(body, label));
 }
 
-function appendMonRow(tb, label) {
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
+function appendMonRow(body, label) {
+  const row = document.createElement('tr');
+  row.innerHTML = `
     <td>
       <div style="font-size:11px;color:#64748b;margin-bottom:3px;">${label}</div>
       <input placeholder="დრო:" style="margin-bottom:4px;">
@@ -919,21 +1493,111 @@ function appendMonRow(tb, label) {
     </td>
     <td><input placeholder="მგ/დლ"></td>
     <td>
-      <input placeholder="TA:"><input placeholder="HR:">
-      <input placeholder="SpO2:"><input placeholder="RR:"><input placeholder="T:">
+      <input placeholder="TA:">
+      <input placeholder="HR:">
+      <input placeholder="SpO2:">
+      <input placeholder="RR:">
+      <input placeholder="T:">
     </td>
     <td><textarea placeholder="მედიკამენტი / შენიშვნა"></textarea></td>`;
-  tb.appendChild(tr);
+  body.appendChild(row);
+  preparePrintMirrors(row);
+  syncPrintMirrors(row);
 }
 
 function addMonRow() {
   appendMonRow(document.getElementById('mon-body'), '+15 წუთი');
 }
 
-/* ── Print ── */
+function preparePrintMirrors(root = document) {
+  const fields = root.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not([type="button"]):not([type="submit"]):not([type="hidden"]), textarea');
+
+  fields.forEach((field) => {
+    if (field.dataset.printPrepared === 'true') {
+      updatePrintMirror(field);
+      return;
+    }
+
+    const isBlock = field.tagName === 'TEXTAREA' || field.closest('.fr') || field.closest('.mon-table td') || field.classList.contains('w-full');
+    const mirror = document.createElement(isBlock ? 'div' : 'span');
+    mirror.className = `print-mirror ${isBlock ? 'block' : 'inline'}`;
+    if (field.classList.contains('patient-f') || field.classList.contains('doctor-f')) {
+      mirror.classList.add('emph');
+    }
+    WIDTH_CLASSES.forEach((cls) => {
+      if (field.classList.contains(cls)) mirror.classList.add(cls);
+    });
+    field.insertAdjacentElement('afterend', mirror);
+    field.dataset.printPrepared = 'true';
+    field._printMirror = mirror;
+
+    const sync = () => updatePrintMirror(field);
+    field.addEventListener('input', sync);
+    field.addEventListener('change', sync);
+    updatePrintMirror(field);
+  });
+}
+
+function formatFieldValue(field) {
+  const raw = field.value || '';
+  const value = field.tagName === 'TEXTAREA' ? raw.replace(/\r\n/g, '\n').trim() : raw.trim();
+
+  if (!value) return '';
+
+  if (field.type === 'date') {
+    const [year, month, day] = value.split('-');
+    return year && month && day ? `${day}.${month}.${year}` : value;
+  }
+
+  if (field.type === 'time') {
+    return value.slice(0, 5);
+  }
+
+  if (field.type === 'datetime-local') {
+    const [datePart, timePart] = value.split('T');
+    if (!datePart || !timePart) return value;
+    const [year, month, day] = datePart.split('-');
+    return year && month && day ? `${day}.${month}.${year} ${timePart.slice(0, 5)}` : value;
+  }
+
+  return value;
+}
+
+function updatePrintMirror(field) {
+  const mirror = field._printMirror;
+  if (!mirror) return;
+  const value = formatFieldValue(field);
+  const empty = !value;
+  mirror.textContent = value;
+  mirror.classList.toggle('empty', empty);
+}
+
+function syncPrintMirrors(root = document) {
+  const fields = root.querySelectorAll('input[data-print-prepared="true"], textarea[data-print-prepared="true"]');
+  fields.forEach(updatePrintMirror);
+}
+
 function doPrint() {
+  syncPrintMirrors(cur >= 0 ? document.getElementById(`doc-${cur}`) : document);
   window.print();
 }
+
+document.addEventListener('focusin', (event) => {
+  if (event.target.matches('input, textarea')) event.target._focused = true;
+});
+
+document.addEventListener('focusout', (event) => {
+  if (event.target.matches('input, textarea')) event.target._focused = false;
+});
+
+window.addEventListener('beforeprint', () => {
+  syncPrintMirrors(cur >= 0 ? document.getElementById(`doc-${cur}`) : document);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  preparePrintMirrors(document);
+  syncPrintMirrors(document);
+});
 </script>
 </body>
 </html>
