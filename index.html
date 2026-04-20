@@ -667,6 +667,11 @@ input.manual-datetime.ul {
     background: white !important;
   }
 
+  body {
+    font-size: 12px !important;
+    line-height: 1.36 !important;
+  }
+
   #toc-screen,
   .top-bar,
   .info-bar,
@@ -701,7 +706,46 @@ input.manual-datetime.ul {
 
   @page {
     size: A4;
-    margin: 12mm;
+    margin: 9mm;
+  }
+
+  .hd-row {
+    margin-bottom: 4px !important;
+    font-size: 11px !important;
+  }
+
+  .doc-title {
+    font-size: 14px !important;
+    line-height: 1.28 !important;
+    margin: 10px 0 12px !important;
+  }
+
+  .p {
+    margin: 6px 0 !important;
+  }
+
+  .ns {
+    margin: 8px 0 2px !important;
+    font-size: 12px !important;
+  }
+
+  .ns-body {
+    margin: 0 0 6px 14px !important;
+    font-size: 11.5px !important;
+    line-height: 1.32 !important;
+  }
+
+  .hr {
+    margin: 10px 0 !important;
+  }
+
+  .cols2 {
+    gap: 14px 18px !important;
+    margin: 8px 0 !important;
+  }
+
+  .fr {
+    margin: 6px 0 !important;
   }
 
   input:not([type="radio"]):not([type="checkbox"]):not([type="button"]):not([type="submit"]):not([type="hidden"]),
@@ -741,27 +785,30 @@ input.manual-datetime.ul {
 
   .signature-grid,
   .refusal-grid {
-    gap: 12px 18px !important;
+    gap: 8px 16px !important;
+    margin-top: 8px !important;
   }
 
   .signature-row {
-    gap: 12px !important;
+    gap: 8px !important;
+    margin-top: 8px !important;
   }
 
   .signature-slot {
-    max-width: 240px;
+    max-width: 220px;
+    gap: 3px !important;
   }
 
   .signature-line {
-    max-width: 220px;
-    min-height: 20px;
+    max-width: 200px;
+    min-height: 16px;
   }
 
   .signature-card .print-mirror.block {
     display: inline-block !important;
     width: auto !important;
-    min-width: 140px;
-    max-width: 240px;
+    min-width: 120px;
+    max-width: 220px;
   }
 
   .warn {
@@ -769,6 +816,9 @@ input.manual-datetime.ul {
     border-color: #fca5a5 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    padding: 9px 12px !important;
+    margin: 10px 0 !important;
+    font-size: 11.5px !important;
   }
 
   .screen-sec-title.blue  { background: var(--blue2) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
