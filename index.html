@@ -349,9 +349,9 @@ textarea {
   margin-top: 4px;
 }
 
-input[type="date"].ul,
 input[type="time"].ul,
-input[type="datetime-local"].ul {
+input.manual-date.ul,
+input.manual-datetime.ul {
   min-width: 140px;
 }
 
@@ -917,7 +917,7 @@ input[type="datetime-local"].ul {
             </div>
             <div class="signature-slot">
               <label>თარიღი</label>
-              <input type="date" class="ul w-sm">
+              <input type="text" class="ul w-sm manual-date" inputmode="numeric" autocomplete="off" placeholder="დდ.თთ.წწწწ">
             </div>
           </div>
         </div>
@@ -999,7 +999,7 @@ input[type="datetime-local"].ul {
             </div>
             <div class="signature-slot">
               <label>თარიღი</label>
-              <input type="date" class="ul w-sm">
+              <input type="text" class="ul w-sm manual-date" inputmode="numeric" autocomplete="off" placeholder="დდ.თთ.წწწწ">
             </div>
           </div>
         </div>
@@ -1081,7 +1081,7 @@ input[type="datetime-local"].ul {
             </div>
             <div class="signature-slot">
               <label>თარიღი</label>
-              <input type="date" class="ul w-sm">
+              <input type="text" class="ul w-sm manual-date" inputmode="numeric" autocomplete="off" placeholder="დდ.თთ.წწწწ">
             </div>
           </div>
         </div>
@@ -1163,7 +1163,7 @@ input[type="datetime-local"].ul {
             </div>
             <div class="signature-slot">
               <label>თარიღი</label>
-              <input type="date" class="ul w-sm">
+              <input type="text" class="ul w-sm manual-date" inputmode="numeric" autocomplete="off" placeholder="დდ.თთ.წწწწ">
             </div>
           </div>
         </div>
@@ -1209,7 +1209,7 @@ input[type="datetime-local"].ul {
         </div>
         <div class="col">
           <div class="fr"><label>სკრინინგის დაწყების დრო</label><input type="time" class="ul w-sm"></div>
-          <div class="fr" style="margin-top:10px;"><label>ინსულტის სიმპტომების დაწყების დრო</label><input type="datetime-local" class="ul"></div>
+          <div class="fr" style="margin-top:10px;"><label>ინსულტის სიმპტომების დაწყების დრო</label><input type="text" class="ul manual-datetime" inputmode="text" autocomplete="off" placeholder="დდ.თთ.წწწწ სს:წწ"></div>
         </div>
       </div>
 
@@ -1307,7 +1307,7 @@ input[type="datetime-local"].ul {
       <div class="cols2" style="margin-top:14px;">
         <div class="col">
           <div class="fr"><label>პაციენტის სახელი და გვარი</label><input type="text" class="ul w-xl patient-f" data-doc="5" placeholder="სახელი გვარი" oninput="onPatient(this)"></div>
-          <div class="fr" style="margin-top:10px;"><label>დაბადების თარიღი</label><input type="date" class="ul"></div>
+          <div class="fr" style="margin-top:10px;"><label>დაბადების თარიღი</label><input type="text" class="ul manual-date" inputmode="numeric" autocomplete="off" placeholder="დდ.თთ.წწწწ"></div>
           <div class="fr" style="margin-top:10px;"><label>ბარათის ნომერი</label><input type="text" class="ul w-sm" placeholder="XXXXX/XX"></div>
         </div>
         <div class="col">
@@ -1341,7 +1341,7 @@ input[type="datetime-local"].ul {
 
       <div class="cols2">
         <div class="col">
-          <div class="fr"><label>ჩარევის თარიღი</label><input type="date" class="ul"></div>
+          <div class="fr"><label>ჩარევის თარიღი</label><input type="text" class="ul manual-date" inputmode="numeric" autocomplete="off" placeholder="დდ.თთ.წწწწ"></div>
           <div class="fr" style="margin-top:10px;"><label>დაწყების დრო</label><input type="time" class="ul w-sm"></div>
           <div class="fr" style="margin-top:10px;"><label>დასრულების დრო</label><input type="time" class="ul w-sm"></div>
         </div>
